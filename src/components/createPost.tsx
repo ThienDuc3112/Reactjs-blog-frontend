@@ -2,6 +2,7 @@ import { useState } from "react";
 import createPost from "./createPost.module.css"
 import ReactQuill from "react-quill";
 import 'react-quill/dist/quill.snow.css';
+import Post from "./post";
 
 const CreatePost = () => {
     let [post, setPost] = useState("")
@@ -46,31 +47,31 @@ const CreatePost = () => {
                     <div id="tags" className={createPost.tags}>
                         <h3>Tags</h3>
                         <span>
-                            <input type="checkbox" value={"Anime"} name="Anime" onChange={() => { tagChange("Anime") }} />
+                            <input type="checkbox" value={"Anime"} id="Anime" onChange={() => { tagChange("Anime") }} />
                             <label htmlFor="Anime">Anime</label>
                         </span>
                         <span>
-                            <input type="checkbox" value={"Review"} name="Review" onChange={() => { tagChange("Review") }} />
+                            <input type="checkbox" value={"Review"} id="Review" onChange={() => { tagChange("Review") }} />
                             <label htmlFor="Review">Review</label>
                         </span>
                         <span>
-                            <input type="checkbox" value={"Rant"} name="Rant" onChange={() => { tagChange("Rant") }} />
+                            <input type="checkbox" value={"Rant"} id="Rant" onChange={() => { tagChange("Rant") }} />
                             <label htmlFor="Rant">Rant</label>
                         </span>
                         <span>
-                            <input type="checkbox" value={"Theory"} name="Theory" onChange={() => { tagChange("Theory") }} />
+                            <input type="checkbox" value={"Theory"} id="Theory" onChange={() => { tagChange("Theory") }} />
                             <label htmlFor="Theory">Theory</label>
                         </span>
                         <span>
-                            <input type="checkbox" value={"Advice"} name="Advice" onChange={() => { tagChange("Advice") }} />
+                            <input type="checkbox" value={"Advice"} id="Advice" onChange={() => { tagChange("Advice") }} />
                             <label htmlFor="Advice">Advice</label>
                         </span>
                         <span>
-                            <input type="checkbox" value={"ModReview"} name="ModReview" onChange={() => { tagChange("ModReview") }} />
+                            <input type="checkbox" value={"ModReview"} id="ModReview" onChange={() => { tagChange("ModReview") }} />
                             <label htmlFor="ModReview">ModReview</label>
                         </span>
                         <span>
-                            <input type="checkbox" value={"Tutorial"} name="Tutorial" onChange={() => { tagChange("Tutorial") }} />
+                            <input type="checkbox" value={"Tutorial"} id="Tutorial" onChange={() => { tagChange("Tutorial") }} />
                             <label htmlFor="Tutorial">Tutorial</label>
                         </span>
                         {/* <span>{tags}</span> */}
@@ -82,7 +83,7 @@ const CreatePost = () => {
 
             <h1 style={{ marginTop: "30px", textAlign: "center" }}>Preview</h1>
 
-            {/* <Post title={title} description = {description} tags = {tags} post = {post} /> */}
+            <Post title={title} description={description} tags={tags} post={post} />
 
         </div>
     )
