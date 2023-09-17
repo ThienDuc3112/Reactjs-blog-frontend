@@ -1,0 +1,11 @@
+.center {
+    text-align: center;
+    display: block;
+    margin: 0 auto 0 auto;
+}
+
+.prettyTextArea {
+    height: 150px;
+    width: 50vw;
+    border-radius: 10px;
+}
