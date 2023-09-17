@@ -20,55 +20,70 @@ const CreatePost = () => {
     }
 
     return (
-        <div className={createPost.site}>
-            <div id="mainContent" className={createPost.mainContent} >
-                <input type="text" placeholder="Title" className={createPost.title} />
-                <textarea placeholder="Description" className={createPost.description} />
-                <ReactQuill value={post} onChange={setPost} />
-            </div>
+        <div className={createPost.page}>
+            <h1 style={{ textAlign: "center" }}>Write your post</h1>
 
-            <div id="options" className={createPost.options}>
-                <div id="status" className={createPost.status}>
-                    <h3>Publish</h3>
-                    <span>Status: Draft</span>
-                    <span>Visiblity: {isPublic ? "Public" : "Private"}</span>
-                    <button>Save as draft</button>
-                    <button>Publish</button>
-                </div>
-                <div id="tags" className={createPost.tags}>
-                    <span>
-                        <input type="checkbox" value={"anime"} name="anime" onChange={() => { tagChange("anime") }} />
-                        <label htmlFor="anime">anime</label>
-                    </span>
-                    <span>
-                        <input type="checkbox" value={"review"} name="review" onChange={() => { tagChange("review") }} />
-                        <label htmlFor="review">review</label>
-                    </span>
-                    <span>
-                        <input type="checkbox" value={"rant"} name="rant" onChange={() => { tagChange("rant") }} />
-                        <label htmlFor="rant">rant</label>
-                    </span>
-                    <span>
-                        <input type="checkbox" value={"theory"} name="theory" onChange={() => { tagChange("theory") }} />
-                        <label htmlFor="theory">theory</label>
-                    </span>
-                    <span>
-                        <input type="checkbox" value={"advice"} name="advice" onChange={() => { tagChange("advice") }} />
-                        <label htmlFor="advice">advice</label>
-                    </span>
-                    <span>
-                        <input type="checkbox" value={"modReview"} name="modReview" onChange={() => { tagChange("modReview") }} />
-                        <label htmlFor="modReview">modReview</label>
-                    </span>
-                    <span>
-                        <input type="checkbox" value={"tutorial"} name="tutorial" onChange={() => { tagChange("tutorial") }} />
-                        <label htmlFor="tutorial">tutorial</label>
-                    </span>
-                    <span>{tags}</span>
-
+            <div className={createPost.siteEditor}>
+                <div id="mainContent" className={createPost.mainContent} >
+                    <input type="text" placeholder="Title" className={createPost.title} value={title} onChange={(e) => { setTitle(e.target.value) }} />
+                    <textarea placeholder="Description" className={createPost.description} value={description} onChange={(e) => { setDescription(e.target.value) }} />
+                    <div className={createPost.editor}>
+                        <ReactQuill style={{ height: "100%" }} value={post} onChange={setPost} />
+                    </div>
                 </div>
 
+                <div id="options" className={createPost.options}>
+                    <div id="status" className={createPost.status}>
+                        <h3>Publish</h3>
+                        <span>Status: Draft</span>
+                        <span>Visiblity: {isPublic ? "Public" : "Private"}</span>
+                        <div className={createPost.buttonsContainer}>
+                            <button className={createPost.button}>Save as draft</button>
+                            <button className={isPublic ? createPost.button : ""} onClick={() => setIsPublic(!isPublic)}>{isPublic ? "Public" : "Private"}</button>
+                            <button className={createPost.publishButton}>Publish</button>
+                        </div>
+                    </div>
+                    <div id="tags" className={createPost.tags}>
+                        <h3>Tags</h3>
+                        <span>
+                            <input type="checkbox" value={"Anime"} name="Anime" onChange={() => { tagChange("Anime") }} />
+                            <label htmlFor="Anime">Anime</label>
+                        </span>
+                        <span>
+                            <input type="checkbox" value={"Review"} name="Review" onChange={() => { tagChange("Review") }} />
+                            <label htmlFor="Review">Review</label>
+                        </span>
+                        <span>
+                            <input type="checkbox" value={"Rant"} name="Rant" onChange={() => { tagChange("Rant") }} />
+                            <label htmlFor="Rant">Rant</label>
+                        </span>
+                        <span>
+                            <input type="checkbox" value={"Theory"} name="Theory" onChange={() => { tagChange("Theory") }} />
+                            <label htmlFor="Theory">Theory</label>
+                        </span>
+                        <span>
+                            <input type="checkbox" value={"Advice"} name="Advice" onChange={() => { tagChange("Advice") }} />
+                            <label htmlFor="Advice">Advice</label>
+                        </span>
+                        <span>
+                            <input type="checkbox" value={"ModReview"} name="ModReview" onChange={() => { tagChange("ModReview") }} />
+                            <label htmlFor="ModReview">ModReview</label>
+                        </span>
+                        <span>
+                            <input type="checkbox" value={"Tutorial"} name="Tutorial" onChange={() => { tagChange("Tutorial") }} />
+                            <label htmlFor="Tutorial">Tutorial</label>
+                        </span>
+                        {/* <span>{tags}</span> */}
+
+                    </div>
+
+                </div>
             </div>
+
+            <h1 style={{ marginTop: "30px", textAlign: "center" }}>Preview</h1>
+
+            {/* <Post title={title} description = {description} tags = {tags} post = {post} /> */}
+
         </div>
     )
 }

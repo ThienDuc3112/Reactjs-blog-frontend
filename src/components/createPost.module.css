@@ -1,50 +1,114 @@
-.mainContent {
-    background-color: aliceblue;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-evenly;
+.page {
+    max-width: 85vw;
+    margin-left: auto;
+    margin-right: auto;
 }
 
-.title {
-    width: 99%;
-    height: 40px;
-    font-size: larger;
-    font-weight: bold;
-    outline: none;
-}
-
-.description {
-    font-size: large;
-    outline: none;
-}
-
-.options {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-evenly;
-    background-color: antiquewhite;
-}
-
-.site {
-    border: solid 3px red;
-    height: 500px;
+.siteEditor {
+    padding-top: 20px;
+    padding-bottom: 20px;
+    min-height: 600px;
     width: 85vw;
     margin-left: auto;
     margin-right: auto;
     display: grid;
     gap: 20px;
     grid-template-columns: 7fr 3fr;
+    grid-auto-flow: column;
 }
 
-.tags {
-    background-color: burlywood;
+.mainContent {
+    display: grid;
+    grid-template-rows: 50px 150px 1fr;
+    row-gap: 20px;
+    height: 100%;
+}
+
+.title {
+    background-color: rgba(0, 0, 0, 0);
+    resize: none;
+    border: solid 1px gray;
+    height: 50px;
+    font-size: larger;
+    font-weight: bold;
+    outline: none;
+}
+
+.description {
+    background-color: rgba(0, 0, 0, 0);
+    height: 150px;
+    font-size: large;
+    border: solid 1px gray;
+    resize: none;
+    outline: none;
+}
+
+.editor {
+    height: 100%;
+    border: solid 1px gray;
+    overflow: scroll;
+    overflow-x: scroll;
+    scrollbar-width: none;
+}
+
+.options {
     display: flex;
     flex-direction: column;
-    justify-content: space-around;
+    height: 100%;
+    /* background-color: antiquewhite; */
 }
 
 .status {
-    background-color: lightgreen;
+    padding: 5px 15px 5px 15px;
+    border: solid 1px gray;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+
+.buttonsContainer {
+    margin-top: 30px;
+    margin-bottom: 10px;
+    height: fit-content;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.button {
+    height: 35px;
+    width: fit-content;
+    padding-left: 10px;
+    padding-right: 10px;
+    border: solid 2px lightblue;
+    background-color: transparent;
+}
+
+.publishButton {
+    height: 35px;
+    width: fit-content;
+    color: white;
+    padding-left: 10px;
+    padding-right: 10px;
+    border: none;
+    background-color: rgb(100, 149, 237);
+}
+
+.publishButton:hover {
+    background-color: rgb(120, 169, 257);
+}
+
+.button:hover {
+    background-color: rgba(0, 0, 0, 0.1);
+}
+
+.tags {
+    /* background-color: burlywood; */
+    margin-top: 20px;
+    padding: 0 15px 15px 15px;
+    border: solid 1px gray;
     display: flex;
     flex-direction: column;
     justify-content: space-around;
