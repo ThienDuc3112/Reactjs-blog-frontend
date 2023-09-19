@@ -78,22 +78,28 @@
 }
 
 .button {
-    height: 35px;
-    width: fit-content;
+    height: 45px;
+    width: calc(fit-content);
     padding-left: 10px;
     padding-right: 10px;
-    border: solid 2px lightblue;
+    border: solid 2px var(--light-cyan);
     background-color: transparent;
+    margin: 0 5px 0 5px;
+}
+
+.buttonPrivate {
+    border: solid 2px var(--color-accent);
 }
 
 .publishButton {
-    height: 35px;
+    margin: 0 5px 0 5px;
+    height: 45px;
     width: fit-content;
     color: white;
     padding-left: 10px;
     padding-right: 10px;
     border: none;
-    background-color: rgb(100, 149, 237);
+    background-color: var(--light-cyan);
 }
 
 .publishButton:hover {

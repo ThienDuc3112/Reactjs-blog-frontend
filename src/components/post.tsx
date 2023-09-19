@@ -4,21 +4,23 @@ interface postProps {
     title: string,
     description: string,
     tags: string[],
-    post: string
+    post: string,
+    time: string
 }
 
 const Post = (props: postProps) => {
-    const TIMETOREAD = Math.round(props.post.split("").length / 200)
+    const TIMETOREAD = Math.round(props.post.split(" ").length / 200)
+    const date = new Date(props.time)
     return (
-        <>
+        <div className={post.page}>
             <div className={post.frontMatter}>
                 <h1>{props.title}</h1>
-                <p>📆 DD/MM/2023 | ⌛ {TIMETOREAD} minute read</p>
+                <p>📆 {`${date.getDate()}/${date.getMonth()}/${date.getFullYear()}`} | ⌛ {TIMETOREAD} minute read</p>
                 <p>📋 Tags: {props.tags.join(", ")}</p>
             </div>
             <hr />
-            <div dangerouslySetInnerHTML={{ __html: props.post }} />
-        </>
+            <div className={post.post} dangerouslySetInnerHTML={{ __html: props.post }} />
+        </div>
     )
 }
 

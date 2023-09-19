@@ -3,13 +3,17 @@ import createPost from "./createPost.module.css"
 import ReactQuill from "react-quill";
 import 'react-quill/dist/quill.snow.css';
 import Post from "./post";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 const CreatePost = () => {
+    let navigate = useNavigate()
     let [post, setPost] = useState("")
     let [isPublic, setIsPublic] = useState(true)
     let [title, setTitle] = useState("")
     let [description, setDescription] = useState("")
     let [tags, setTags] = useState([] as string[])
+
     const tagChange = (value: string) => {
         let tagsCopy = [...tags]
         if (tagsCopy.includes(value)) {
@@ -20,9 +24,26 @@ const CreatePost = () => {
         }
     }
 
+    const submit = () => {
+        if (title.length == 0 || description.length == 0 || tags.length == 0 || post.length == 0) {
+            alert("Please fill in all the field")
+            return
+        }
+        const body = {
+            title, description, tags, post, isPublic
+        }
+        axios.post("http://localhost:6969/post/newpost", body).then((res) => {
+            if (res.data.success) {
+                console.log(res.data.data)
+                alert(`Post has been posted, your post's id is ${res.data.id}`)
+                navigate("/")
+            }
+        })
+    }
+
     return (
         <div className={createPost.page}>
-            <h1 style={{ textAlign: "center" }}>Write your post</h1>
+            <h1 style={{ textAlign: "center", color: `var(--light-cyan)` }}>Write your post</h1>
 
             <div className={createPost.siteEditor}>
                 <div id="mainContent" className={createPost.mainContent} >
@@ -40,8 +61,8 @@ const CreatePost = () => {
                         <span>Visiblity: {isPublic ? "Public" : "Private"}</span>
                         <div className={createPost.buttonsContainer}>
                             <button className={createPost.button}>Save as draft</button>
-                            <button className={isPublic ? createPost.button : ""} onClick={() => setIsPublic(!isPublic)}>{isPublic ? "Public" : "Private"}</button>
-                            <button className={createPost.publishButton}>Publish</button>
+                            <button className={isPublic ? createPost.button : `${createPost.button} ${createPost.buttonPrivate}`} onClick={() => setIsPublic(!isPublic)}>{isPublic ? "Public" : "Private"}</button>
+                            <button className={createPost.publishButton} onClick={submit}>Publish</button>
                         </div>
                     </div>
                     <div id="tags" className={createPost.tags}>
@@ -83,7 +104,7 @@ const CreatePost = () => {
 
             <h1 style={{ marginTop: "30px", textAlign: "center" }}>Preview</h1>
 
-            <Post title={title} description={description} tags={tags} post={post} />
+            <Post time={`${new Date()}`} title={title} description={description} tags={tags} post={post} />
 
         </div>
     )
