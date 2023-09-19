@@ -4,6 +4,9 @@
     width: 200px;
     background-color: #f1f1f1;
     position: fixed;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
     height: 100vh;
     overflow: auto;
     top: 0;
@@ -14,6 +17,18 @@
     color: black;
     padding: 16px;
     text-decoration: none;
+}
+
+.login {
+    display: block;
+    color: black;
+    padding: 16px;
+    text-decoration: none;
+}
+
+.login:hover {
+    background-color: #888;
+    color: white;
 }
 
 .hrefa:hover {

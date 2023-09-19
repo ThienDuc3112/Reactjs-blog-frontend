@@ -1,0 +1,25 @@
+.backgroundImg {
+    width: calc(100% - 200px);
+    height: 480px;
+    position: absolute;
+    top: 0;
+    z-index: -1;
+    object-fit: cover;
+}
+
+.title {
+    color: white;
+    margin: 100px auto 0 auto;
+    width: fit-content;
+    text-align: center;
+    height: fit-content;
+}
+
+.title h1 {
+    font-size: 40px;
+}
+
+.title p {
+    margin-top: 0;
+    margin-bottom: 8px;
+}
