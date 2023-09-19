@@ -1,6 +1,7 @@
 # My blog post frontend
 
 Read this spagetti code at your own risk 
+
 Side effect of reading this include:
   - losing fate in humanity
   - blindness
