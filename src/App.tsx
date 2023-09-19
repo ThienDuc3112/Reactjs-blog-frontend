@@ -6,19 +6,26 @@ import Navbar from './components/navbar';
 import Login from './components/login';
 import Register from './components/register';
 import PostWrapper from './components/postWrapper';
+import Posts from './components/posts';
+import NotFound from './components/pageNotFound';
 
 function App() {
   return (
     <>
       <Navbar />
-      <Routes>
-        <Route path='/' element={<Home />} />
-        <Route path='/createpost/' element={<CreatePost />} />
-        <Route path='/login/' element={<Login />} />
-        <Route path='/register/' element={<Register />} />
-        <Route path='/post' element={<PostWrapper />} />
-        <Route path='/post/:id' element={<PostWrapper />} />
-      </Routes>
+      <div className='page-container'>
+
+        <Routes >
+          <Route path='/' element={<Home />} />
+          <Route path='/:id' element={<NotFound />} />
+          <Route path='/createpost/' element={<CreatePost />} />
+          <Route path='/about' element={<NotFound />} />
+          <Route path='/login/' element={<Login />} />
+          <Route path='/register/' element={<Register />} />
+          <Route path='/post' element={<Posts />} />
+          <Route path='/post/:id' element={<PostWrapper />} />
+        </Routes>
+      </div>
     </>
   );
 }

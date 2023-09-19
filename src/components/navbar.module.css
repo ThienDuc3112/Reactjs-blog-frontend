@@ -1,0 +1,35 @@
+.sidebar {
+    margin: 0;
+    padding: 0;
+    width: 200px;
+    background-color: #f1f1f1;
+    position: fixed;
+    height: 100vh;
+    overflow: auto;
+    top: 0;
+}
+
+.hrefa {
+    display: block;
+    color: black;
+    padding: 16px;
+    text-decoration: none;
+}
+
+.hrefa:hover {
+    background-color: var(--color-accent2);
+    color: white;
+}
+
+.logo {
+    width: 130px;
+    display: block;
+    border-radius: 50%;
+}
+
+.logoHref {
+    display: block;
+    height: fit-content;
+    width: fit-content;
+    margin: 20px auto 20px auto;
+}
