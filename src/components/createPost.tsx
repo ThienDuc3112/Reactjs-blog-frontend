@@ -30,7 +30,7 @@ const CreatePost = () => {
             return
         }
         const body = {
-            title, description, tags, post, isPublic
+            title, description, tags, post, isPublic, readTime: Math.round(post.split(" ").length / 200)
         }
         axios.post("http://localhost:6969/post/newpost", body).then((res) => {
             if (res.data.success) {
@@ -104,7 +104,7 @@ const CreatePost = () => {
 
             <h1 style={{ marginTop: "30px", textAlign: "center" }}>Preview</h1>
 
-            <Post time={`${new Date()}`} title={title} description={description} tags={tags} post={post} />
+            <Post readTime={Math.round(post.split(" ").length / 200)} time={`${new Date()}`} title={title} description={description} tags={tags} post={post} />
 
         </div>
     )

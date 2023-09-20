@@ -12,6 +12,7 @@ const PostWrapper = () => {
             if (res.data.success) {
                 const data = res.data.data
                 setReturnValue(<Post
+                    readTime={data.readTime}
                     tags={data.tags}
                     description={data.description}
                     post={data.post}
@@ -20,7 +21,7 @@ const PostWrapper = () => {
                 )
             }
         })
-    })
+    }, [])
     return returnValue
 }
 
