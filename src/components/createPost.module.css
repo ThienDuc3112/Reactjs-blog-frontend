@@ -25,11 +25,18 @@
 
 .title {
     background-color: rgba(0, 0, 0, 0);
-    resize: none;
     border: solid 1px gray;
     height: 50px;
     font-size: larger;
     font-weight: bold;
+    outline: none;
+}
+
+.postIDInput {
+    background-color: rgba(0, 0, 0, 0);
+    border: solid 1px gray;
+    height: 30px;
+    font-weight: large;
     outline: none;
 }
 
@@ -57,8 +64,8 @@
     /* background-color: antiquewhite; */
 }
 
-.status {
-    padding: 5px 15px 5px 15px;
+.optionsBox {
+    padding: 0px 15px 15px 15px;
     border: solid 1px gray;
     display: flex;
     flex-direction: column;
@@ -109,12 +116,7 @@
     background-color: rgba(0, 0, 0, 0.1);
 }
 
-.tags {
+.marginTop {
     /* background-color: burlywood; */
     margin-top: 20px;
-    padding: 0 15px 15px 15px;
-    border: solid 1px gray;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-around;
 }

@@ -8,12 +8,12 @@ const Home = () => {
     const [currentText, setCurrentText] = useState("")
     const [currentIndex, setCurrentIndex] = useState(0)
     const [allPost, setAllPost] = useState([] as any[])
-    let delay = 75
+    let delay = 50;
 
     useEffect(() => {
-        axios.get(`http://localhost:6969/post/allPreview`).then(res => {
+        axios.get(`http://localhost:6969/post/previewall`).then(res => {
             if (res.data.success) {
-                setAllPost(res.data.data)
+                setAllPost((res.data.data as Array<any>).reverse())
             }
         })
     }, [])

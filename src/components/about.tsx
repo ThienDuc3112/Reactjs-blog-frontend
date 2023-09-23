@@ -1,5 +1,13 @@
+import about from "./about.module.css"
+
 const About = () => {
-    return <h1>About</h1>
+    return (
+        <div>
+            <div className={about.front}>
+
+            </div>
+        </div>
+    )
 }
 
 export default About
