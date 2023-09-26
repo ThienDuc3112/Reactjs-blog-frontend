@@ -1,0 +1,47 @@
+.wrapper {
+    width: 50%;
+    margin: 100px auto 0 auto;
+    text-align: center;
+    background-color: rgba(80, 80, 80, 0.2);
+    border-radius: 20px;
+    display: flex;
+    flex-direction: column;
+    height: 500px
+}
+
+.wrapper button {
+    margin: 0 auto 0 auto;
+    height: 45px;
+    width: 100px;
+    color: white;
+    padding-left: 10px;
+    padding-right: 10px;
+    border: none;
+    background-color: var(--light-cyan);
+}
+
+.wrapper button:hover {
+    background-color: rgb(120, 169, 257);
+}
+
+.wrapper span {
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+    height: fit-content;
+    margin: 25px 0;
+}
+
+.wrapper input {
+    width: 80%;
+    margin: 0 auto;
+    height: 40px;
+    outline: none;
+    font-size: large;
+}
+
+.wrapper h1 {
+    font-size: 40px;
+    margin-top: 100px;
+    margin-bottom: 25px;
+}

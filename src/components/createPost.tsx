@@ -3,7 +3,7 @@ import createPost from "./createPost.module.css"
 import ReactQuill from "react-quill";
 import 'react-quill/dist/quill.snow.css';
 import Post from "./post";
-import axios from "axios";
+import axios, { AxiosError } from "axios";
 import { useNavigate } from "react-router-dom";
 
 const CreatePost = () => {
@@ -50,14 +50,25 @@ const CreatePost = () => {
         const body = {
             ...state, readTime: Math.round(state.post.split(" ").length / 200)
         }
-        axios.post(`http://localhost:6969/post/${state.id}`, body).then((res) => {
+        axios.post(`http://localhost:6969/post/${state.id}`, body, { withCredentials: true }).then((res) => {
             if (res.data.success) {
                 console.log(res.data.data)
                 alert(`Post has been posted, your post's id is ${state.id}`)
                 navigate("/")
             }
-        }).catch((error) => {
-            alert("An error have occured, this might be due to the post's ID already exist, please try replace the post's ID")
+        }).catch((error: AxiosError) => {
+            switch (error.response?.status) {
+                case 401:
+                case 403:
+                    alert("You are not login")
+                    break;
+                case 400:
+                    alert("Duplicate post's ID, please provide another post's ID")
+                    break;
+                default:
+                    alert("An internal error has happened")
+                    break;
+            }
         })
     }
 

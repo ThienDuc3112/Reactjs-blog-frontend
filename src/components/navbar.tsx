@@ -1,7 +1,10 @@
+import { useContext } from "react"
 import navbar from "./navbar.module.css"
+import { UserContext } from "../App"
 
 const Navbar = () => {
-
+    const { user, setUser } = useContext(UserContext)
+    console.log(user)
     return (
         <nav className={navbar.sidebar}>
             <div>
@@ -12,8 +15,12 @@ const Navbar = () => {
                 <a className={navbar.hrefa} href="/projects">Projects</a>
                 <a className={navbar.hrefa} href="/tags">Tags</a>
             </div>
-
-            <a className={navbar.login}>Login</a>
+            <div>
+                {user ? [
+                    <a className={navbar.login} href="/createpost">Create post</a>,
+                    <a className={navbar.login} href="/logout">Logout</a>
+                ] : <a className={navbar.login} href="/login">Login</a>}
+            </div>
 
         </nav >
     )
