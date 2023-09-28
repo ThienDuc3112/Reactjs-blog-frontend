@@ -1,10 +1,13 @@
-import { useEffect, useState } from "react"
+import { useContext, useEffect, useState } from "react"
 import home from "./home.module.css"
 import axios from "axios"
 import PostCard from "./postCard"
+import { UserContext } from "../App"
 
 const Home = () => {
     const TITLE = "Console.log(\"Hello Internet\")"
+    const { user } = useContext(UserContext)
+
     const [currentText, setCurrentText] = useState("")
     const [currentIndex, setCurrentIndex] = useState(0)
     const [allPost, setAllPost] = useState([] as any[])
@@ -15,6 +18,8 @@ const Home = () => {
             if (res.data.success) {
                 setAllPost((res.data.data as Array<any>).reverse())
             }
+        }).catch(err => {
+            alert("Cannot connect to the server")
         })
     }, [])
 
@@ -39,7 +44,7 @@ const Home = () => {
                 <p>If you haven't realize, Bocchi is literally me</p>
             </div>
             <div>
-                {allPost.map(postPreview =>
+                {allPost.filter((post) => post.isPublic || post?.author === user?.username || user?.username == "huyen").map(postPreview =>
                     <PostCard
                         key={postPreview.id}
                         tags={postPreview.tags}
@@ -48,6 +53,7 @@ const Home = () => {
                         readTime={postPreview.readTime}
                         description={postPreview.description}
                         time={postPreview.time}
+                        author={postPreview.author ?? "Anonymous"}
                     />
                 )}
             </div>

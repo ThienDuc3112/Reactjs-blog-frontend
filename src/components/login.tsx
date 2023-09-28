@@ -27,7 +27,6 @@ const Login = () => {
                     if (globalUser.setUser != undefined) { globalUser.setUser({ username: user.username }) }
 
                     alert("Login successfully")
-                    console.log(globalUser.user)
                     navigate("/")
                 }
                 return

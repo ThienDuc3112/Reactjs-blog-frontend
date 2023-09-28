@@ -1,6 +1,6 @@
 :root {
   --color-accent: #E4291B;
-  --color-accent2: #1BD6E4;
+  --color-accent2: #1ECBE1;
   --pink: #E300DA;
   --light-cyan: rgb(100, 149, 237);
 
@@ -11,7 +11,8 @@
 }
 
 body {
-  background-color: rgb(256, 256, 249);
+  /* background-color: rgb(256, 256, 249); */
+  background-color: #eeeeee;
 }
 
 .page-container {

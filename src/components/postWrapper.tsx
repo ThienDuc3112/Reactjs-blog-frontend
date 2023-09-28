@@ -14,6 +14,7 @@ const PostWrapper = () => {
                 if (res.data.success) {
                     const data = res.data.data
                     setReturnValue(<Post
+                        author={data.author ?? "Anonymous"}
                         readTime={data.readTime}
                         tags={data.tags}
                         description={data.description}

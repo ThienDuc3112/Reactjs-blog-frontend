@@ -1,10 +1,11 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import createPost from "./createPost.module.css"
 import ReactQuill from "react-quill";
 import 'react-quill/dist/quill.snow.css';
 import Post from "./post";
 import axios, { AxiosError } from "axios";
 import { useNavigate } from "react-router-dom";
+import { UserContext } from "../App";
 
 const CreatePost = () => {
     const TAGS = [
@@ -17,6 +18,7 @@ const CreatePost = () => {
         "Tutorial"
     ]
     let navigate = useNavigate()
+    const { user } = useContext(UserContext)
     let [state, setState] = useState({
         post: "",
         isPublic: true,
@@ -48,7 +50,7 @@ const CreatePost = () => {
             return
         }
         const body = {
-            ...state, readTime: Math.round(state.post.split(" ").length / 200)
+            ...state, readTime: Math.round(state.post.split(" ").length / 200), author: user?.username ?? "Anonymous"
         }
         axios.post(`http://localhost:6969/post/${state.id}`, body, { withCredentials: true }).then((res) => {
             if (res.data.success) {
@@ -59,8 +61,10 @@ const CreatePost = () => {
         }).catch((error: AxiosError) => {
             switch (error.response?.status) {
                 case 401:
-                case 403:
                     alert("You are not login")
+                    break;
+                case 403:
+                    alert("Your session has ended, please relogin")
                     break;
                 case 400:
                     alert("Duplicate post's ID, please provide another post's ID")
@@ -122,7 +126,13 @@ const CreatePost = () => {
 
             <h1 style={{ marginTop: "30px", textAlign: "center" }}>Preview</h1>
 
-            <Post readTime={Math.round(state.post.split(" ").length / 200)} time={`${new Date()}`} title={state.title} description={state.description} tags={state.tags} post={state.post} />
+            <Post
+                readTime={Math.round(state.post.split(" ").length / 200)}
+                time={`${new Date()}`} title={state.title}
+                description={state.description}
+                tags={state.tags}
+                post={state.post}
+                author={user?.username ?? "anonymous"} />
 
         </div>
     )
