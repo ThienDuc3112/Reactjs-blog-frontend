@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import postCard from "./postCard.module.css"
 interface IPostcardProps {
     title: string;
@@ -14,14 +15,14 @@ const PostCard = (props: IPostcardProps) => {
     const DATEWRITTEN = new Date(props.time)
     return (
         <div className={postCard.card} >
-            <a href={`/post/${props.id}`} className={postCard.fillDiv}>
+            <Link to={`/post/${props.id}`} className={postCard.fillDiv}>
                 <h1>{props.title}</h1>
                 <p>{props.description}</p>
                 <hr />
                 <p>📆 {DATEWRITTEN.getDate()}/{DATEWRITTEN.getMonth()}/{DATEWRITTEN.getFullYear()} | ⌛ {props.readTime} minute to read </p>
                 <p>📋 Tags: {props.tags.join(", ")} </p>
                 <p>✍️ Writer: {props.author[0].toUpperCase() + props.author.slice(1)}</p>
-            </a>
+            </Link>
         </div>
     )
 

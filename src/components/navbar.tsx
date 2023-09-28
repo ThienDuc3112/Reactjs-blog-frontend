@@ -2,6 +2,7 @@ import { useContext, useEffect } from "react"
 import navbar from "./navbar.module.css"
 import { UserContext } from "../App"
 import axios from "axios"
+import { Link } from "react-router-dom"
 
 const Navbar = () => {
     const { user, setUser } = useContext(UserContext)
@@ -24,16 +25,16 @@ const Navbar = () => {
     return (
         <nav className={navbar.sidebar}>
             <div>
-                <a className={navbar.logoHref} href="/"><img id="logo" className={navbar.logo} src="https://avatars.githubusercontent.com/u/142168995?v=4" /></a>
-                <a className={navbar.hrefa} href="/">Home</a>
-                <a className={navbar.hrefa} href="/about">About</a>
-                <a className={navbar.hrefa} href="/posts">Posts</a>
-                <a className={navbar.hrefa} href="/projects">Projects</a>
-                <a className={navbar.hrefa} href="/tags">Tags</a>
+                <Link className={navbar.logoHref} to="/"><img id="logo" className={navbar.logo} src="https://avatars.githubusercontent.com/u/142168995?v=4" /></Link>
+                <Link className={navbar.hrefa} to="/">Home</Link>
+                <Link className={navbar.hrefa} to="/about">About</Link>
+                <Link className={navbar.hrefa} to="/posts">Posts</Link>
+                <Link className={navbar.hrefa} to="/projects">Projects</Link>
+                <Link className={navbar.hrefa} to="/tags">Tags</Link>
             </div>
             <div>
-                {!user ? <a className={navbar.accountButton} href="/login">Login</a> : [
-                    <a className={`${navbar.accountButton} ${navbar.createPost}`} href="/createpost">Create post</a>,
+                {!user ? <Link className={navbar.accountButton} to="/login">Login</Link> : [
+                    <Link className={`${navbar.accountButton} ${navbar.createPost}`} to="/createpost">Create post</Link>,
                     <a className={`${navbar.accountButton} ${navbar.logout}`} onClick={logout}>Logout</a>
                 ]}
             </div>
