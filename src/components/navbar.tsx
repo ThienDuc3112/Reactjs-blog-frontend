@@ -28,14 +28,14 @@ const Navbar = () => {
                 <Link className={navbar.logoHref} to="/"><img id="logo" className={navbar.logo} src="https://avatars.githubusercontent.com/u/142168995?v=4" /></Link>
                 <Link className={navbar.hrefa} to="/">Home</Link>
                 <Link className={navbar.hrefa} to="/about">About</Link>
-                <Link className={navbar.hrefa} to="/posts">Posts</Link>
-                <Link className={navbar.hrefa} to="/projects">Projects</Link>
+                {/* <Link className={navbar.hrefa} to="/posts">Posts</Link> */}
+                {/* <Link className={navbar.hrefa} to="/projects">Projects</Link> */}
                 <Link className={navbar.hrefa} to="/tags">Tags</Link>
             </div>
             <div>
                 {!user ? <Link className={navbar.accountButton} to="/login">Login</Link> : [
-                    <Link className={`${navbar.accountButton} ${navbar.createPost}`} to="/createpost">Create post</Link>,
-                    <a className={`${navbar.accountButton} ${navbar.logout}`} onClick={logout}>Logout</a>
+                    <Link key={"a"} className={`${navbar.accountButton} ${navbar.createPost}`} to="/createpost">Create post</Link>,
+                    <a key={"b"} className={`${navbar.accountButton} ${navbar.logout}`} onClick={logout}>Logout</a>
                 ]}
             </div>
 

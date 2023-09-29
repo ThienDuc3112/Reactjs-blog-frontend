@@ -1,0 +1,23 @@
+.button {
+    margin: auto;
+    padding: auto 10px;
+    height: 45px;
+    width: 80px;
+    color: white;
+    background-color: var(--light-cyan);
+    border: none;
+    display: flex;
+    flex-direction: row;
+    text-align: center;
+    text-decoration: none;
+}
+
+.button:hover {
+    background-color: rgb(120, 169, 257);
+}
+
+.center {
+    margin: auto;
+    width: fit-content;
+    display: block;
+}

@@ -21,7 +21,7 @@ const PostCard = (props: IPostcardProps) => {
                 <hr />
                 <p>📆 {DATEWRITTEN.getDate()}/{DATEWRITTEN.getMonth()}/{DATEWRITTEN.getFullYear()} | ⌛ {props.readTime} minute to read </p>
                 <p>📋 Tags: {props.tags.join(", ")} </p>
-                <p>✍️ Writer: {props.author[0].toUpperCase() + props.author.slice(1)}</p>
+                <p>✍️ Author: {props.author[0].toUpperCase() + props.author.slice(1)}</p>
             </Link>
         </div>
     )

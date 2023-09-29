@@ -20,6 +20,11 @@
     text-decoration: none;
 }
 
+.hrefa:hover {
+    background-color: var(--color-accent2);
+    color: white;
+}
+
 .accountButton {
     display: block;
     color: black;
@@ -39,11 +44,6 @@
 
 .logout:hover {
     background-color: #961EE1;
-}
-
-.hrefa:hover {
-    background-color: var(--color-accent2);
-    color: white;
 }
 
 .logo {

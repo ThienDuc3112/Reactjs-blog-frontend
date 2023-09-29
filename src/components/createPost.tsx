@@ -6,17 +6,9 @@ import Post from "./post";
 import axios, { AxiosError } from "axios";
 import { useNavigate } from "react-router-dom";
 import { UserContext } from "../App";
+import TAGS from "../public/tags.json"
 
 const CreatePost = () => {
-    const TAGS = [
-        "Anime",
-        "Review",
-        "Rant",
-        "Theory",
-        "Advice",
-        "ModReview",
-        "Tutorial"
-    ]
     let navigate = useNavigate()
     const { user } = useContext(UserContext)
     let [state, setState] = useState({
@@ -132,7 +124,8 @@ const CreatePost = () => {
                 description={state.description}
                 tags={state.tags}
                 post={state.post}
-                author={user?.username ?? "anonymous"} />
+                author={user?.username ?? "anonymous"}
+                lastEdit={new Date()} />
 
         </div>
     )
