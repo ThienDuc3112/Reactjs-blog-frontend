@@ -1,0 +1,14 @@
+.container {
+    width: 70%;
+    margin: 0 auto;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+}
+
+.container img {
+    margin: 0 auto;
+    width: 300px;
+}

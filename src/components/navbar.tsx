@@ -33,9 +33,12 @@ const Navbar = () => {
                 <Link className={navbar.hrefa} to="/tags">Tags</Link>
             </div>
             <div>
-                {!user ? <Link className={navbar.accountButton} to="/login">Login</Link> : [
+                {!user ? [
+                    <Link className={navbar.accountButton} to="/register">Register</Link>,
+                    <Link className={navbar.accountButton} to="/login">Login</Link>
+                ] : [
                     <Link key={"a"} className={`${navbar.accountButton} ${navbar.createPost}`} to="/createpost">Create post</Link>,
-                    <a key={"b"} className={`${navbar.accountButton} ${navbar.logout}`} onClick={logout}>Logout</a>
+                    <Link key={"b"} to="/" className={`${navbar.accountButton} ${navbar.logout}`} onClick={logout}>Logout</Link>
                 ]}
             </div>
 

@@ -88,7 +88,7 @@ const CreatePost = () => {
                         <span>Status: Draft</span>
                         <span>Visiblity: {state.isPublic ? "Public" : "Private"}</span>
                         <div className={createPost.buttonsContainer}>
-                            <button className={createPost.button}>Save as draft</button>
+                            {/* <button className={createPost.button}>Save as draft</button> */}
                             <button className={state.isPublic ? createPost.button : `${createPost.button} ${createPost.buttonPrivate}`} onClick={() => setState({ ...state, isPublic: !state.isPublic })}>{state.isPublic ? "Public" : "Private"}</button>
                             <button className={createPost.publishButton} onClick={submit}>Publish</button>
                         </div>
