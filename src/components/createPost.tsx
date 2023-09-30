@@ -7,6 +7,7 @@ import axios, { AxiosError } from "axios";
 import { useNavigate } from "react-router-dom";
 import { UserContext } from "../App";
 import TAGS from "../public/tags.json"
+import toolbar from "../public/toolbarOptions.json"
 
 const CreatePost = () => {
     let navigate = useNavigate()
@@ -20,13 +21,14 @@ const CreatePost = () => {
         id: ""
     })
 
+
     const tagChange = (value: string) => {
         let tagsCopy = [...state.tags]
         if (tagsCopy.includes(value)) {
             tagsCopy.splice(tagsCopy.indexOf(value), 1)
             setState({ ...state, tags: tagsCopy })
         } else {
-            setState({ ...state, tags: [...state.tags, value] })
+            setState({ ...state, tags: [...tagsCopy, value] })
         }
     }
 
@@ -77,7 +79,9 @@ const CreatePost = () => {
                     <input type="text" placeholder="Title" className={createPost.title} value={state.title} onChange={(e) => { setState({ ...state, title: e.target.value }) }} />
                     <textarea placeholder="Description" className={createPost.description} value={state.description} onChange={(e) => { setState({ ...state, description: e.target.value }) }} />
                     <div className={createPost.editor}>
-                        <ReactQuill style={{ height: "100%" }} value={state.post} onChange={(e) => { setState({ ...state, post: e }) }} />
+                        <ReactQuill style={{ height: "100%" }} modules={{
+                            toolbar
+                        }} value={state.post} onChange={(e) => { setState({ ...state, post: e }) }} />
                     </div>
                 </div>
 

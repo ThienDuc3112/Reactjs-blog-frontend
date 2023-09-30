@@ -6,6 +6,7 @@ import { UserContext } from "../App"
 import TAGS from "../public/tags.json"
 import ReactQuill from "react-quill"
 import createPostCSS from "./createPost.module.css"
+import toolbar from "../public/toolbarOptions.json"
 
 const Edit = () => {
     const param = useParams()
@@ -43,9 +44,9 @@ const Edit = () => {
         let tagsCopy = [...tags]
         if (tagsCopy.includes(value)) {
             tagsCopy.splice(tagsCopy.indexOf(value), 1)
-            setTags(tags)
+            setTags(tagsCopy)
         } else {
-            setTags([...tags, value])
+            setTags([...tagsCopy, value])
         }
     }
 
@@ -68,13 +69,14 @@ const Edit = () => {
         const body = {
             post, isPublic, description, title, tags, id, author, time, readTime: Math.round(post.split(" ").length / 200)
         }
-        axios.patch(`http://localhost:6969/post/${id}`, body, { withCredentials: true }).then((res) => {
+        axios.patch(`http://localhost:6969/post/${param.id}`, body, { withCredentials: true }).then((res) => {
             if (res.data.success) {
                 console.log(res.data.data)
                 alert(`Post has been updated`)
                 navigate("/")
             }
         }).catch((error: AxiosError) => {
+            console.log(error)
             alert("An internal error has happened")
             navigate("/")
         })
@@ -89,7 +91,7 @@ const Edit = () => {
                     <input type="text" placeholder="Title" className={createPostCSS.title} value={title} onChange={(e) => { setTitle(e.target.value) }} />
                     <textarea placeholder="Description" className={createPostCSS.description} value={description} onChange={(e) => { setDescription(e.target.value) }} />
                     <div className={createPostCSS.editor}>
-                        <ReactQuill style={{ height: "100%" }} value={post} onChange={(e) => { setPost(e) }} />
+                        <ReactQuill style={{ height: "100%" }} modules={{ toolbar }} value={post} onChange={(e) => { setPost(e) }} />
                     </div>
                 </div>
 
@@ -100,7 +102,7 @@ const Edit = () => {
                         <span>Status: Draft</span>
                         <span>Visiblity: {isPublic ? "Public" : "Private"}</span>
                         <div className={createPostCSS.buttonsContainer}>
-                            <button className={createPostCSS.button}>Save as draft</button>
+                            {/* <button className={createPostCSS.button}>Save as draft</button> */}
                             <button className={isPublic ? createPostCSS.button : `${createPostCSS.button} ${createPostCSS.buttonPrivate}`} onClick={() => setIsPublic(!isPublic)}>{isPublic ? "Public" : "Private"}</button>
                             <button className={createPostCSS.publishButton} onClick={submit}>Publish</button>
                         </div>
