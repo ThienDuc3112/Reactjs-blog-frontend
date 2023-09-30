@@ -8,14 +8,14 @@ const Navbar = () => {
     const { user, setUser } = useContext(UserContext)
 
     useEffect(() => {
-        axios.get("http://localhost:6969/auth/", { withCredentials: true }).then(res => {
+        axios.get("https://blogbackend-uihh.onrender.com/auth/", { withCredentials: true }).then(res => {
             if (!setUser) return;
             setUser({ username: res.data.data.username })
         }).catch(() => { })
     }, [])
 
     const logout = () => {
-        axios.get("http://localhost:6969/auth/logout", { withCredentials: true }).then(res => {
+        axios.get("https://blogbackend-uihh.onrender.com/auth/logout", { withCredentials: true }).then(res => {
             if (setUser) return setUser(undefined);
         }).catch(() => {
             alert("Cannot connect to the server")

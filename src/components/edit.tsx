@@ -22,7 +22,7 @@ const Edit = () => {
     let [time, setTime] = useState(new Date())
 
     useEffect(() => {
-        axios.get(`http://localhost:6969/post/${param.id}`).then((res) => {
+        axios.get(`https://blogbackend-uihh.onrender.com/post/${param.id}`).then((res) => {
             if (res.data.success) {
                 const data = res.data.data
                 setPost(data.post)
@@ -69,7 +69,7 @@ const Edit = () => {
         const body = {
             post, isPublic, description, title, tags, id, author, time, readTime: Math.round(post.split(" ").length / 200)
         }
-        axios.patch(`http://localhost:6969/post/${param.id}`, body, { withCredentials: true }).then((res) => {
+        axios.patch(`https://blogbackend-uihh.onrender.com/post/${param.id}`, body, { withCredentials: true }).then((res) => {
             if (res.data.success) {
                 console.log(res.data.data)
                 alert(`Post has been updated`)

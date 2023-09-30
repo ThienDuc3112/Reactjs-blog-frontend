@@ -13,6 +13,9 @@ import About from './components/about';
 import Edit from './components/edit';
 import Tags from './components/tagsListing';
 import TagFilter from './components/tagFilter';
+import { disableReactDevTools } from '@fvilers/disable-react-devtools';
+
+disableReactDevTools()
 
 export const UserContext = createContext<IUserContext>({})
 

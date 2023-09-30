@@ -46,7 +46,7 @@ const CreatePost = () => {
         const body = {
             ...state, readTime: Math.round(state.post.split(" ").length / 200), author: user?.username ?? "Anonymous"
         }
-        axios.post(`http://localhost:6969/post/${state.id}`, body, { withCredentials: true }).then((res) => {
+        axios.post(`https://blogbackend-uihh.onrender.com/post/${state.id}`, body, { withCredentials: true }).then((res) => {
             if (res.data.success) {
                 console.log(res.data.data)
                 alert(`Post has been posted, your post's id is ${state.id}`)

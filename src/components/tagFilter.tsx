@@ -12,7 +12,7 @@ const TagFilter = () => {
     const [allPost, setAllPost] = useState([] as any[])
 
     useEffect(() => {
-        axios.get(`http://localhost:6969/post/previewall`).then(res => {
+        axios.get(`https://blogbackend-uihh.onrender.com/post/previewall`).then(res => {
             if (res.data.success) {
                 setAllPost((res.data.data as Array<any>).reverse().filter(post => post.tags.includes(param.tag)))
             }

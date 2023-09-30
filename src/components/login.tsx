@@ -20,7 +20,7 @@ const Login = () => {
             alert("Please fill all fields")
             return
         }
-        axios.post("http://localhost:6969/auth/login", user, { withCredentials: true })
+        axios.post("https://blogbackend-uihh.onrender.com/auth/login", user, { withCredentials: true })
             .then((res) => {
                 if (res.data.success) {
                     console.log(globalUser)

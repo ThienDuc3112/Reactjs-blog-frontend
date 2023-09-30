@@ -21,7 +21,7 @@ const PostWrapper = () => {
             navigate("/")
             return
         }
-        axios.delete(`http://localhost:6969/post/${param.id}`, { withCredentials: true }).then((res) => {
+        axios.delete(`https://blogbackend-uihh.onrender.com/post/${param.id}`, { withCredentials: true }).then((res) => {
             if (res.data.success) {
                 alert("Post deleted")
                 navigate("/")
@@ -49,7 +49,7 @@ const PostWrapper = () => {
     }
 
     useEffect(() => {
-        axios.get(`http://localhost:6969/post/${param.id}`)
+        axios.get(`https://blogbackend-uihh.onrender.com/post/${param.id}`)
             .then(res => {
                 if (res.data.success) {
                     const data = res.data.data
