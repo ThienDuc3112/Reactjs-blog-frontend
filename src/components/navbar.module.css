@@ -1,60 +1,97 @@
 .sidebar {
-    margin: 0;
-    padding: 0;
-    width: 200px;
-    /* background-color: #f1f1f1; */
-    background-color: white;
-    position: fixed;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    height: 100vh;
-    overflow: auto;
-    top: 0;
+  margin: 0;
+  padding: 0;
+  width: 200px;
+  /* background-color: #f1f1f1; */
+  background-color: white;
+  position: fixed;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100vh;
+  overflow: auto;
+  top: 0;
 }
 
 .hrefa {
-    display: block;
-    color: black;
-    padding: 16px;
-    text-decoration: none;
+  display: block;
+  color: black;
+  padding: 16px;
+  text-decoration: none;
 }
 
 .hrefa:hover {
-    background-color: var(--color-accent2);
-    color: white;
+  background-color: var(--color-accent2);
+  color: white;
 }
 
 .accountButton {
-    display: block;
-    color: black;
-    padding: 16px;
-    text-decoration: none;
+  display: block;
+  color: black;
+  padding: 16px;
+  text-decoration: none;
 }
 
 .accountButton:hover {
-    background-color: var(--color-accent2);
-    color: white;
+  background-color: var(--color-accent2);
+  color: white;
 }
 
 .logout {
-    background-color: #E1341E;
-    color: white;
+  background-color: #e1341e;
+  color: white;
 }
 
 .logout:hover {
-    background-color: #961EE1;
+  background-color: #961ee1;
 }
 
 .logo {
-    width: 130px;
-    display: block;
-    border-radius: 50%;
+  width: 130px;
+  display: block;
+  border-radius: 50%;
 }
 
 .logoHref {
-    display: block;
+  display: block;
+  height: fit-content;
+  width: fit-content;
+  margin: 20px auto 20px auto;
+}
+.checkbox {
+  display: none;
+}
+
+.navbtn {
+  display: none;
+}
+
+@media screen and (max-width: 900px) {
+  .sidebar {
+    margin: 0;
+    padding: 0;
+    width: 100%;
     height: fit-content;
-    width: fit-content;
-    margin: 20px auto 20px auto;
+    /* background-color: #f1f1f1; */
+    background-color: white;
+    position: sticky;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    overflow: auto;
+    top: 0;
+  }
+  .logo {
+    margin: 0 0 0 20px;
+    height: 70px;
+    width: initial;
+    display: block;
+    border-radius: 50%;
+  }
+  .hrefa {
+    display: inline-block;
+  }
+  .responsive {
+    display: none;
+  }
 }

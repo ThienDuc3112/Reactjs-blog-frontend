@@ -1,9 +1,8 @@
 :root {
-  --color-accent: #E4291B;
-  --color-accent2: #1ECBE1;
-  --pink: #E300DA;
+  --color-accent: #e4291b;
+  --color-accent2: #1ecbe1;
+  --pink: #e300da;
   --light-cyan: rgb(100, 149, 237);
-
 }
 
 .App {
@@ -17,6 +16,12 @@ body {
 
 .page-container {
   margin-left: 200px;
+}
+
+@media screen and (max-width: 900px) {
+  .page-container {
+    margin: 0;
+  }
 }
 
 .App-logo {
