@@ -1,18 +1,27 @@
 .page {
-    width: 80%;
-    margin: 0 auto 0 auto;
+  width: 80%;
+  margin: 0 auto 0 auto;
 }
 
 .post img {
-    width: 80%;
-    display: block;
-    margin: 0 auto 0 auto;
+  width: 80%;
+  display: block;
+  margin: 0 auto 0 auto;
 }
 
 .page hr {
-    color: var(--color-accent2);
+  color: var(--color-accent2);
 }
 
 .frontMatter h1 {
-    color: var(--color-accent);
+  color: var(--color-accent);
+}
+
+@media screen and (max-width: 900px) {
+  .page {
+    width: 90%;
+  }
+  .page img {
+    width: 90%;
+  }
 }

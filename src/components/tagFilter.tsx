@@ -11,7 +11,6 @@ const TagFilter = () => {
 
   const param = useParams();
   const [allPost, setAllPost] = useState([] as any[]);
-
   useEffect(() => {
     axios
       .get(`${SERVER_URL}/post/previewall`)

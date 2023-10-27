@@ -28,4 +28,19 @@
   .backgroundImg {
     width: 100%;
   }
+  .title h1 {
+    font-size: 28px;
+  }
+  .title p {
+    margin-bottom: 5px;
+  }
+}
+@media screen and (max-width: 400px) {
+  .title h1 {
+    font-size: 24px;
+    margin-bottom: 12px;
+  }
+  .title p {
+    margin-bottom: 3px;
+  }
 }

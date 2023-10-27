@@ -1,6 +1,6 @@
 :root {
   --color-accent: #e4291b;
-  --color-accent2: #1ecbe1;
+  --color-accent2: rgb(100, 149, 237);
   --pink: #e300da;
   --light-cyan: rgb(100, 149, 237);
 }

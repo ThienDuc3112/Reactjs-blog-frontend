@@ -69,6 +69,7 @@ const PostWrapper = () => {
                 time={data.time}
                 title={data.title}
                 lastEdit={data.lastEdit}
+                isPublic={data.isPublic}
               />
               {user?.username == data.author || user?.username == "huyen" ? (
                 <div className={postWrapperCSS.optionContainer}>

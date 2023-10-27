@@ -207,6 +207,7 @@ const Edit = () => {
         post={post}
         author={author}
         lastEdit={new Date()}
+        isPublic={isPublic}
       />
     </div>
   );

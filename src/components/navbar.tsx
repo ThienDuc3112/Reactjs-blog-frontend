@@ -31,7 +31,7 @@ const Navbar = () => {
 
   return (
     <nav className={navbar.sidebar}>
-      <div>
+      <div className={navbar.responsivegroup}>
         <Link className={`${navbar.logoHref} `} to="/">
           <img
             id="logo"
@@ -39,12 +39,6 @@ const Navbar = () => {
             src="https://avatars.githubusercontent.com/u/142168995?v=4"
           />
         </Link>
-        <input
-          type="checkbox"
-          name="navCheck"
-          id="navcheck"
-          className={navbar.checkbox}
-        />
         <Link className={`${navbar.hrefa} ${navbar.responsive}`} to="/">
           Home
         </Link>
@@ -57,7 +51,7 @@ const Navbar = () => {
           Tags
         </Link>
       </div>
-      <div className={navbar.responsive}>
+      <div className={navbar.responsivegroup}>
         {!user
           ? [
               <Link
@@ -77,7 +71,7 @@ const Navbar = () => {
                 className={`${navbar.accountButton} ${navbar.createPost}`}
                 to="/createpost"
               >
-                Create post
+                Write
               </Link>,
               <Link
                 key={"logout"}
@@ -88,13 +82,6 @@ const Navbar = () => {
                 Logout
               </Link>,
             ]}
-      </div>
-      <div className={navbar.navbtn}>
-        <label htmlFor="navcheck">
-          <span></span>
-          <span></span>
-          <span></span>
-        </label>
       </div>
     </nav>
   );

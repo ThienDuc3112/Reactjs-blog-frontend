@@ -191,6 +191,7 @@ const CreatePost = () => {
         post={state.post}
         author={user?.username ?? "anonymous"}
         lastEdit={new Date()}
+        isPublic={state.isPublic}
       />
     </div>
   );
