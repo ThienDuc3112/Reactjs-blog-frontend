@@ -13,11 +13,11 @@ const Navbar = () => {
       .get(`${SERVER_URL}/auth/`, { withCredentials: true })
       .then((res) => {
         if (!setUser) return;
-        setUser({ username: res.data.data.username });
+        console.log(res.data.data);
+        setUser({ username: res.data.data.username, role: res.data.data.role });
       })
       .catch(() => {});
   }, []);
-
   const logout = () => {
     axios
       .get(`${SERVER_URL}/auth/logout`, { withCredentials: true })
@@ -66,13 +66,15 @@ const Navbar = () => {
               </Link>,
             ]
           : [
-              <Link
-                key={"createpost"}
-                className={`${navbar.accountButton} ${navbar.createPost}`}
-                to="/createpost"
-              >
-                Write
-              </Link>,
+              user.role.indexOf(0) >= 0 || user.role.indexOf(1) >= 0 ? (
+                <Link
+                  key={"createpost"}
+                  className={`${navbar.accountButton} ${navbar.createPost}`}
+                  to="/createpost"
+                >
+                  Write
+                </Link>
+              ) : null,
               <Link
                 key={"logout"}
                 to="/"

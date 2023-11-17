@@ -26,9 +26,11 @@ const Login = () => {
         if (res.data.success) {
           console.log(globalUser);
           if (globalUser.setUser != undefined) {
-            globalUser.setUser({ username: user.username });
+            globalUser.setUser({
+              username: user.username,
+              role: res.data.role,
+            });
           }
-
           alert("Login successfully");
           navigate("/");
         }

@@ -71,7 +71,9 @@ const PostWrapper = () => {
                 lastEdit={data.lastEdit}
                 isPublic={data.isPublic}
               />
-              {user?.username == data.author || user?.username == "huyen" ? (
+              {user?.username == data.author ||
+              user?.role?.indexOf(1) >= 0 ||
+              user?.role?.indexOf(0) >= 0 ? (
                 <div className={postWrapperCSS.optionContainer}>
                   <Link
                     className={`${postWrapperCSS.button}`}
