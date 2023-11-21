@@ -1,0 +1,129 @@
+.page {
+  max-width: 95%;
+  margin: 0 auto 0 auto;
+}
+
+.siteEditor {
+  padding-top: 20px;
+  padding-bottom: 20px;
+  min-height: 650px;
+  width: 90%;
+  margin-left: auto;
+  margin-right: auto;
+  display: grid;
+  gap: 20px;
+  grid-template-columns: 7fr 3fr;
+  grid-auto-flow: column;
+}
+
+.mainContent {
+  display: grid;
+  grid-template-rows: 50px 150px 1fr;
+  row-gap: 20px;
+  height: 100%;
+}
+
+.title {
+  background-color: rgba(0, 0, 0, 0);
+  border: solid 1px gray;
+  height: 50px;
+  font-size: larger;
+  font-weight: bold;
+  outline: none;
+}
+
+.postIDInput {
+  background-color: rgba(0, 0, 0, 0);
+  border: solid 1px gray;
+  height: 30px;
+  font-weight: large;
+  outline: none;
+}
+
+.description {
+  background-color: rgba(0, 0, 0, 0);
+  height: 150px;
+  font-size: large;
+  border: solid 1px gray;
+  resize: none;
+  outline: none;
+}
+
+.editor {
+  height: 100%;
+  border: solid 1px gray;
+  overflow: scroll;
+  overflow-x: scroll;
+  scrollbar-width: none;
+  overflow-y: hidden;
+}
+
+.options {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  /* background-color: antiquewhite; */
+}
+
+.optionsBox {
+  padding: 0px 15px 15px 15px;
+  border: solid 1px gray;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.buttonsContainer {
+  margin-top: 30px;
+  margin-bottom: 10px;
+  height: fit-content;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.button {
+  height: 45px;
+  width: calc(fit-content);
+  padding-left: 10px;
+  padding-right: 10px;
+  border: solid 2px var(--light-cyan);
+  background-color: transparent;
+  margin: 0 5px 0 5px;
+}
+
+.buttonPrivate {
+  border: solid 2px var(--color-accent);
+}
+
+.publishButton {
+  margin: 0 5px 0 5px;
+  height: 45px;
+  width: fit-content;
+  color: white;
+  padding-left: 10px;
+  padding-right: 10px;
+  border: none;
+  background-color: var(--light-cyan);
+}
+
+.publishButton:hover {
+  background-color: rgb(120, 169, 257);
+}
+
+.button:hover {
+  background-color: rgba(0, 0, 0, 0.1);
+}
+
+.marginTop {
+  /* background-color: burlywood; */
+  margin-top: 20px;
+}
+
+@media screen and (max-width: 900px) {
+  .siteEditor {
+    display: flex;
+    flex-direction: column;
+  }
+}

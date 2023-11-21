@@ -1,4 +1,4 @@
-import Image from "next/image";
+import PreviewList from "../_components/previewList/previewList";
 import styles from "./page.module.css";
 
 export default function Home() {
@@ -25,6 +25,7 @@ export default function Home() {
           <p>If you haven{"'"}t realize, Bocchi is literally me</p>
         </div>
       </div>
+      <PreviewList />
     </>
   );
 }
