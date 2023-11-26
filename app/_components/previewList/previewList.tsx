@@ -1,10 +1,11 @@
 "use client";
 import { useEffect, useState } from "react";
 import PostCard from "../postCard/postCard";
+import { useUserContext } from "@/app/_context/userContext";
 
 const PreviewList = () => {
   const [allPost, setAllPost] = useState([] as any[]);
-
+  const { user } = useUserContext();
   useEffect(() => {
     fetch(`http://localhost:6969/post/previewall`)
       .then((res) =>
@@ -21,12 +22,13 @@ const PreviewList = () => {
   return (
     <div>
       {allPost
-        //   .filter(
-        //     (post) =>
-        //       post.isPublic ||
-        //       post?.author === user?.username ||
-        //       user?.username == "huyen"
-        //   )
+        .filter(
+          (post) =>
+            post.isPublic ||
+            post?.author === user?.username ||
+            user?.username == "huyen"
+        )
+        .reverse()
         .map((postPreview) => (
           <PostCard
             key={postPreview.id}

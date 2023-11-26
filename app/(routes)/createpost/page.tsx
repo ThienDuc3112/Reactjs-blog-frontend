@@ -1,16 +1,17 @@
 "use client";
-import { useContext, useState } from "react";
+import { useState } from "react";
 import createPost from "./page.module.css";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
 // import { UserContext } from "../App";
 import TAGS from "../../_assets/tags.json";
 import toolbar from "../../_assets/toolbarOptions.json";
-import { redirect } from "next/navigation";
-import Post from "../post/[id]/page";
+import { useRouter } from "next/navigation";
+import { useUserContext } from "@/app/_context/userContext";
 
 const CreatePost = () => {
-  //   const { user } = useContext(UserContext);
+  const { user } = useUserContext();
+  const router = useRouter();
   let [state, setState] = useState({
     post: "",
     isPublic: true,
@@ -44,28 +45,28 @@ const CreatePost = () => {
     const body = {
       ...state,
       readTime: Math.round(state.post.split(" ").length / 200),
-      //   author: user?.username ?? "Anonymous",
-      author: "Anonymous",
     };
-    fetch(`${process.env.API_URL}/post/${state.id}`, {
+    fetch(`${process.env.NEXT_PUBLIC_API_URL}/post/${state.id}`, {
       method: "POST",
+      mode: "cors",
+      credentials: "include",
       headers: {
         "Content-type": "application/json",
       },
       body: JSON.stringify(body),
     })
       .then((res) => {
-        res.json().then((data) => {
-          if (data.success) {
-            console.log(data.data);
-            alert(`Post has been posted, your post's id is ${state.id}`);
-            redirect("/");
-          }
-        });
+        if (res.ok) {
+          res.json().then((data) => {
+            if (data.success) {
+              alert(`Post has been posted, your post's id is ${state.id}`);
+              router.push("/");
+            }
+          });
+        }
       })
-
       .catch((error) => {
-        console.log(error);
+        console.error(error);
         switch (error.response?.status) {
           case 401:
             alert("You are not login");

@@ -1,5 +1,6 @@
 import Link from "next/link";
 import navbar from "./navbar.module.css";
+import UserButtons from "./userButton";
 
 const Navbar = () => {
   return (
@@ -25,6 +26,7 @@ const Navbar = () => {
           Tags
         </Link>
       </div>
+      <UserButtons />
     </nav>
   );
 };

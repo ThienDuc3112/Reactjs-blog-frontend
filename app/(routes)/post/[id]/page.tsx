@@ -2,9 +2,12 @@ import { redirect } from "next/navigation";
 import React from "react";
 import post from "./page.module.css";
 import Comments from "@/app/_components/comments/comments";
+import EditAndDelete from "./editAndDelete";
 
 const Post = async ({ params }: { params: { id: string } }) => {
-  const res = await fetch(`${process.env.API_URL}/post/${params.id}`);
+  const res = await fetch(
+    `${process.env.NEXT_PUBLIC_API_URL}/post/${params.id}`
+  );
   const data = await res.json();
   if (!data.success) {
     redirect("/notfound");
@@ -39,6 +42,7 @@ const Post = async ({ params }: { params: { id: string } }) => {
           dangerouslySetInnerHTML={{ __html: data.data.post }}
         />
       </div>
+      <EditAndDelete author={data.data.author} id={params.id} />
       <Comments />
     </>
   );
