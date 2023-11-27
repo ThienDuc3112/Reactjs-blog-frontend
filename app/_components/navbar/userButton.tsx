@@ -1,7 +1,7 @@
 "use client";
 import Link from "next/link";
 import navbar from "./navbar.module.css";
-import { useUserContext } from "@/app/_context/userContext";
+import { useUserContext } from "@/app/_context/context";
 
 const UserButtons = () => {
   const { user, setUser } = useUserContext();

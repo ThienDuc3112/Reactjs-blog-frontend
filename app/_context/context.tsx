@@ -1,6 +1,8 @@
 "use client";
 import { createContext, useContext, useEffect, useState } from "react";
 import { IUserContext } from "../_interfaces/userContext";
+import { IThemeContext } from "../_interfaces/themeContext";
+import { Theme } from "../_interfaces/themeContext";
 
 const UserContext = createContext<IUserContext>({
   user: {
@@ -8,6 +10,11 @@ const UserContext = createContext<IUserContext>({
     role: [],
   },
   setUser: () => {},
+});
+
+const ThemeContext = createContext<IThemeContext>({
+  theme: Theme.Light,
+  setTheme: () => {},
 });
 
 const ContextProvider = ({
@@ -19,6 +26,7 @@ const ContextProvider = ({
     username: "",
     role: [] as number[],
   });
+  const [theme, setTheme] = useState(Theme.Light);
   useEffect(() => {
     fetch(`${process.env.NEXT_PUBLIC_API_URL}/auth`, {
       credentials: "include",
@@ -37,12 +45,22 @@ const ContextProvider = ({
       .catch((error) => {});
   }, []);
   return (
-    <UserContext.Provider value={{ user, setUser }}>
-      {children}
-    </UserContext.Provider>
+    <ThemeContext.Provider value={{ theme, setTheme }}>
+      <UserContext.Provider value={{ user, setUser }}>
+        <div
+          className={`context ${
+            theme == Theme.Light ? "lightMode" : "darkMode"
+          }`}
+        >
+          {children}
+        </div>
+      </UserContext.Provider>
+    </ThemeContext.Provider>
   );
 };
 
 const useUserContext = () => useContext(UserContext);
 
-export { UserContext, useUserContext, ContextProvider };
+const useThemeContext = () => useContext(ThemeContext);
+
+export { useUserContext, useThemeContext, ContextProvider };

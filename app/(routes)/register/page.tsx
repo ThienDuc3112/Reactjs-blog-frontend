@@ -1,57 +1,58 @@
 "use client";
-import { useUserContext } from "@/app/_context/context";
-import { FormEvent, useState } from "react";
-import login from "./login.module.css";
 import { useRouter } from "next/navigation";
+import { useState, FormEvent } from "react";
+import registerCSS from "./register.module.css";
+import loginCSS from "../login/login.module.css";
 
-const Login = () => {
-  const globalUser = useUserContext();
+const Register = () => {
   const router = useRouter();
-
   const [user, setUser] = useState({
     username: "",
+    email: "",
     password: "",
   });
 
   const submit = (e: FormEvent) => {
     e.preventDefault();
-    if (user.password.length == 0 || user.username.length == 0) {
+    if (
+      user.password.length == 0 ||
+      user.username.length == 0 ||
+      user.email.length == 0
+    ) {
       alert("Please fill all fields");
       return;
     }
-    fetch(`${process.env.NEXT_PUBLIC_API_URL}/auth/login`, {
+    fetch(`${process.env.NEXT_PUBLIC_API_URL}/auth/register`, {
       method: "POST",
+      credentials: "include",
       headers: {
         "Content-type": "application/json",
       },
       body: JSON.stringify(user),
-      credentials: "include",
     })
       .then((res) => {
         if (res.ok) {
           res.json().then((data) => {
             if (data.success) {
-              if (globalUser.setUser != undefined) {
-                globalUser.setUser({
-                  username: user.username,
-                  role: data.role,
-                });
-              }
-              alert("Login successfully");
-              router.push("/");
+              alert("Register successfully");
+              router.push("/login");
             }
             return;
           });
         }
       })
       .catch((err) => {
-        alert(err);
+        alert(`Error: ${err?.response?.data?.message}`);
+        router.push("/");
       });
   };
 
   return (
-    <form className={login.wrapper} onSubmit={submit}>
-      <h1>Login</h1>
+    <form
+      className={`${loginCSS.wrapper} ${registerCSS.height}`}
+      onSubmit={submit}
+    >
+      <h1 style={{ marginTop: "80px" }}>Register</h1>
       <span>
         <label htmlFor="username">Username</label>
         <input
@@ -68,6 +69,18 @@ const Login = () => {
         />
       </span>
       <span>
+        <label htmlFor="email">Email</label>
+        <input
+          type="email"
+          name="email"
+          id="email"
+          value={user.email.toUpperCase()}
+          onChange={(e) => {
+            setUser({ ...user, email: e.target.value.toLowerCase() });
+          }}
+        />
+      </span>
+      <span>
         <label htmlFor="password">Password</label>
         <input
           type="password"
@@ -79,9 +92,9 @@ const Login = () => {
           }}
         />
       </span>
-      <button type="submit">Login</button>
+      <button type="submit">Register</button>
     </form>
   );
 };
 
-export default Login;
+export default Register;

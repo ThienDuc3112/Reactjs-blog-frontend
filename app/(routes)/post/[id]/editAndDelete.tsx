@@ -1,7 +1,7 @@
 "use client";
 import Link from "next/link";
 import postWrapperCSS from "./editAndDelete.module.css";
-import { useUserContext } from "@/app/_context/userContext";
+import { useUserContext } from "@/app/_context/context";
 import { useRouter } from "next/navigation";
 
 const EditAndDelete = ({ id, author }: { id: string; author: string }) => {
@@ -52,19 +52,26 @@ const EditAndDelete = ({ id, author }: { id: string; author: string }) => {
       });
   };
   return (
-    <div className={postWrapperCSS.optionContainer}>
-      <Link className={`${postWrapperCSS.button}`} href={`/post/edit/${id}`}>
-        <label className={postWrapperCSS.center}>Edit</label>
-      </Link>
-      <button
-        onClick={() => {
-          deletePost(author);
-        }}
-        className={`${postWrapperCSS.button} ${postWrapperCSS.redButton}`}
-      >
-        <label className={postWrapperCSS.center}>Delete</label>
-      </button>
-    </div>
+    <>
+      {user.username == author || user.role.indexOf(0) >= 0 ? (
+        <div className={postWrapperCSS.optionContainer}>
+          <Link
+            className={`${postWrapperCSS.button}`}
+            href={`/post/edit/${id}`}
+          >
+            <label className={postWrapperCSS.center}>Edit</label>
+          </Link>
+          <button
+            onClick={() => {
+              deletePost(author);
+            }}
+            className={`${postWrapperCSS.button} ${postWrapperCSS.redButton}`}
+          >
+            <label className={postWrapperCSS.center}>Delete</label>
+          </button>
+        </div>
+      ) : null}
+    </>
   );
 };
 

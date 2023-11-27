@@ -1,0 +1,39 @@
+.title {
+  text-align: center;
+  margin: 100px 0;
+}
+
+.tagsContainer {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  width: 60%;
+  margin: auto;
+  gap: 20px;
+  text-align: center;
+}
+
+.tag {
+  margin: 0 auto;
+  text-decoration: none;
+  height: 60px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  font-weight: bold;
+  width: 100%;
+  max-width: 200px;
+  min-width: 100px;
+  background-color: var(--light-cyan);
+  color: white;
+}
+
+@media screen and (max-width: 900px) {
+  .tagsContainer {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    width: 80%;
+    margin: auto;
+    gap: 30px;
+    text-align: center;
+  }
+}

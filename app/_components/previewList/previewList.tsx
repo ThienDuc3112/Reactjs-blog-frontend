@@ -1,7 +1,7 @@
 "use client";
 import { useEffect, useState } from "react";
 import PostCard from "../postCard/postCard";
-import { useUserContext } from "@/app/_context/userContext";
+import { useUserContext } from "@/app/_context/context";
 
 const PreviewList = () => {
   const [allPost, setAllPost] = useState([] as any[]);

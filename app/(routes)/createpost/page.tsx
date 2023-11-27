@@ -3,14 +3,11 @@ import { useState } from "react";
 import createPost from "./page.module.css";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
-// import { UserContext } from "../App";
 import TAGS from "../../_assets/tags.json";
 import toolbar from "../../_assets/toolbarOptions.json";
 import { useRouter } from "next/navigation";
-import { useUserContext } from "@/app/_context/userContext";
 
 const CreatePost = () => {
-  const { user } = useUserContext();
   const router = useRouter();
   let [state, setState] = useState({
     post: "",
