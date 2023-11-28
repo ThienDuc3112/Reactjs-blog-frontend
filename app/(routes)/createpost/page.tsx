@@ -1,11 +1,15 @@
 "use client";
 import { useState } from "react";
 import createPost from "./page.module.css";
-import ReactQuill from "react-quill";
+// import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
 import TAGS from "../../_assets/tags.json";
 import toolbar from "../../_assets/toolbarOptions.json";
 import { useRouter } from "next/navigation";
+import dynamic from "next/dynamic";
+const ReactQuill = dynamic(() => import("react-quill"), {
+  ssr: false,
+});
 
 const CreatePost = () => {
   const router = useRouter();

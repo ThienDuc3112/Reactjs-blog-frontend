@@ -15,6 +15,10 @@ const Post = async ({ params }: { params: { id: string } }) => {
   const date = new Date(data.data.time);
   return (
     <>
+      <title>{data.data.title}</title>
+      <meta name="description" content={data.data.description} />
+      <meta name="keywords" content={data.data.tags.join(", ")} />
+      <meta name="author" content={data.data.author} />
       <div className={post.page}>
         <div className={post.frontMatter}>
           <h1>{data.data.title}</h1>
