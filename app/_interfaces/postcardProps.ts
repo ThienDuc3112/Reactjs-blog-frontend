@@ -6,4 +6,5 @@ export default interface IPostcardProps {
   id: number;
   tags: string[];
   author: string;
+  isPublic: boolean;
 }

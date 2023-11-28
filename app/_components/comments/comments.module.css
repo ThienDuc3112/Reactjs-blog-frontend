@@ -1,2 +1,29 @@
-.comments {
+.commentSection {
+  margin-top: 50px;
+  display: flex;
+  justify-content: center;
+}
+
+.button {
+  margin: auto;
+  padding: auto 10px;
+  height: 45px;
+  width: 150px;
+  display: flex;
+  justify-content: center;
+  color: white;
+  background-color: var(--light-cyan);
+  border: none;
+  display: flex;
+  flex-direction: row;
+  text-align: center;
+  text-decoration: none;
+}
+
+.button:disabled {
+  background-color: grey;
+}
+
+.button:hover {
+  filter: brightness(125%);
 }

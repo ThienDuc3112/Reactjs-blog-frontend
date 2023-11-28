@@ -6,12 +6,18 @@ import TAGS from "../../_assets/tags.json";
 import toolbar from "../../_assets/toolbarOptions.json";
 import { useRouter } from "next/navigation";
 import dynamic from "next/dynamic";
+import { useUserContext } from "@/app/_context/context";
 const ReactQuill = dynamic(() => import("react-quill"), {
   ssr: false,
 });
 
 const CreatePost = () => {
   const router = useRouter();
+  const { user } = useUserContext();
+  if (!user.role.includes(0) && !user.role.includes(1)) {
+    alert("You don't have permission to create post");
+    router.push("/");
+  }
   let [state, setState] = useState({
     post: "",
     isPublic: true,

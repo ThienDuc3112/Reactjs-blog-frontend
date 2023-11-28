@@ -1,5 +1,4 @@
 "use client";
-
 import { useUserContext } from "@/app/_context/context";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
@@ -26,7 +25,9 @@ const Edit = ({ params }: { params: { id: string } }) => {
   let [submitButtonDisabled, setSubmitButtonDisabled] = useState(false);
 
   useEffect(() => {
-    fetch(`${process.env.NEXT_PUBLIC_API_URL}/post/${params.id}`)
+    fetch(`${process.env.NEXT_PUBLIC_API_URL}/post/${params.id}`, {
+      credentials: "include",
+    })
       .then((res) => {
         if (res.ok) {
           res.json().then((data) => {

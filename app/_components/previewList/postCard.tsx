@@ -6,7 +6,10 @@ const PostCard = (props: IPostcardProps) => {
   const DATEWRITTEN = new Date(props.time);
   return (
     <div className={postCard.card}>
-      <Link href={`/post/${props.id}`} className={postCard.fillDiv}>
+      <Link
+        href={`/post/${props.isPublic ? "public" : "private"}/${props.id}`}
+        className={postCard.fillDiv}
+      >
         <h1>{props.title}</h1>
         <p>{props.description}</p>
         <hr />

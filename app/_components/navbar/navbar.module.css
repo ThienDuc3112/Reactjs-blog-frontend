@@ -43,7 +43,8 @@
 }
 
 .logout:hover {
-  background-color: #961ee1;
+  background-color: #e1341e;
+  filter: brightness(135%);
 }
 
 .logo {

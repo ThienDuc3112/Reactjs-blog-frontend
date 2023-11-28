@@ -50,7 +50,7 @@ const Post = async ({ params }: { params: { id: string } }) => {
         />
       </div>
       <EditAndDelete author={data.data.author} id={params.id} />
-      <Comments />
+      <Comments id={params.id} />
     </>
   );
 };

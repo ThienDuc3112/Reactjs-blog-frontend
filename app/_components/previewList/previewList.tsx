@@ -1,6 +1,6 @@
 "use client";
 import { useEffect, useState } from "react";
-import PostCard from "../postCard/postCard";
+import PostCard from "./postCard";
 import { useUserContext } from "@/app/_context/context";
 
 const PreviewList = ({ link }: { link: string }) => {
@@ -13,6 +13,7 @@ const PreviewList = ({ link }: { link: string }) => {
       .then((res) =>
         res.json().then((data) => {
           if (data.success) {
+            console.log(data);
             setAllPost(data.data);
           }
         })
@@ -36,6 +37,7 @@ const PreviewList = ({ link }: { link: string }) => {
               description={postPreview.description}
               time={postPreview.time}
               author={postPreview.author ?? "Anonymous"}
+              isPublic={postPreview.isPublic}
             />
           ))
       ) : (
