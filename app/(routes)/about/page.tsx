@@ -18,8 +18,8 @@ const About = () => {
           </a>
         </p>
         <p>
-          <a href="https://www.hackerrank.com/ntduc4" target="_blank">
-            Hackerrank
+          <a href="https://leetcode.com/ThienDuc3112/" target="_blank">
+            Leetcode
           </a>
         </p>
         <p>

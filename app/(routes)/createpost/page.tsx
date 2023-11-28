@@ -1,7 +1,6 @@
 "use client";
 import { useState } from "react";
 import createPost from "./page.module.css";
-// import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
 import TAGS from "../../_assets/tags.json";
 import toolbar from "../../_assets/toolbarOptions.json";
@@ -113,9 +112,7 @@ const CreatePost = () => {
           <div className={createPost.editor}>
             <ReactQuill
               style={{ height: "100%" }}
-              modules={{
-                toolbar,
-              }}
+              modules={{ toolbar }}
               value={state.post}
               onChange={(e) => {
                 setState({ ...state, post: e });

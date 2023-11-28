@@ -31,6 +31,7 @@ const ContextProvider = ({
     fetch(`${process.env.NEXT_PUBLIC_API_URL}/auth`, {
       credentials: "include",
       mode: "cors",
+      cache: "no-cache",
     })
       .then((res) => {
         if (res.ok) {

@@ -6,7 +6,10 @@ import EditAndDelete from "./editAndDelete";
 
 const Post = async ({ params }: { params: { id: string } }) => {
   const res = await fetch(
-    `${process.env.NEXT_PUBLIC_API_URL}/post/${params.id}`
+    `${process.env.NEXT_PUBLIC_API_URL}/post/${params.id}`,
+    {
+      cache: "no-cache",
+    }
   );
   const data = await res.json();
   if (!data.success) {
