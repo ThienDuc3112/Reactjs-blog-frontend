@@ -4,7 +4,7 @@ import createPost from "./page.module.css";
 import "react-quill/dist/quill.snow.css";
 import TAGS from "../../_assets/tags.json";
 import toolbar from "../../_assets/toolbarOptions.json";
-import { useRouter } from "next/navigation";
+import { redirect, useRouter } from "next/navigation";
 import dynamic from "next/dynamic";
 import { useUserContext } from "@/app/_context/context";
 const ReactQuill = dynamic(() => import("react-quill"), {
@@ -12,12 +12,11 @@ const ReactQuill = dynamic(() => import("react-quill"), {
 });
 
 const CreatePost = () => {
-  const router = useRouter();
   const { user } = useUserContext();
-  if (!user.role.includes(0) && !user.role.includes(1)) {
-    alert("You don't have permission to create post");
-    router.push("/");
+  if (!user || (user.role.indexOf(0) < 0 && user.role.indexOf(1) < 0)) {
+    redirect("/");
   }
+  const router = useRouter();
   let [state, setState] = useState({
     post: "",
     isPublic: true,

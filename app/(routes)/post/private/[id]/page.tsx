@@ -68,7 +68,7 @@ const PrivatePost = ({ params }: { params: { id: string } }) => {
         />
       </div>
       <EditAndDelete author={data.author} id={params.id} />
-      <Comments />
+      <Comments id={params.id} />
     </>
   );
 };
