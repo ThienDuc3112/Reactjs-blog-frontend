@@ -55,7 +55,7 @@ const EditAndDelete = ({ id, author }: { id: string; author: string }) => {
     <>
       {user.username == author || user.role.indexOf(0) >= 0 ? (
         <div className={postWrapperCSS.optionContainer}>
-          <Link className={`${postWrapperCSS.button}`} href={`/edit/${id}`}>
+          <Link className={`${postWrapperCSS.button}`} href={`/edit?id=${id}`}>
             <label className={postWrapperCSS.center}>Edit</label>
           </Link>
           <button

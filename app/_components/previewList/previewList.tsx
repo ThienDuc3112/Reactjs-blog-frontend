@@ -4,6 +4,7 @@ import PostCard from "./postCard";
 import { useUserContext } from "@/app/_context/context";
 
 const PreviewList = ({ link }: { link: string }) => {
+  // const [page, setPage] = useState(1)
   const [allPost, setAllPost] = useState([] as any[]);
   const { user } = useUserContext();
   useEffect(() => {
@@ -13,8 +14,9 @@ const PreviewList = ({ link }: { link: string }) => {
       .then((res) =>
         res.json().then((data) => {
           if (data.success) {
-            console.log(data);
             setAllPost(data.data);
+          } else {
+            alert(data.message);
           }
         })
       )

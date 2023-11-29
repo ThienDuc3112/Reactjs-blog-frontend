@@ -7,7 +7,7 @@ const PostCard = (props: IPostcardProps) => {
   return (
     <div className={postCard.card}>
       <Link
-        href={`/post/${props.isPublic ? "public" : "private"}/${props.id}`}
+        href={`/post/${props.isPublic ? `public` : `private`}?id=${props.id}`}
         className={postCard.fillDiv}
       >
         <h1>{props.title}</h1>
@@ -18,7 +18,10 @@ const PostCard = (props: IPostcardProps) => {
           {DATEWRITTEN.getFullYear()} | ⌛ {props.readTime} minute to read{" "}
         </p>
         <p>
-          ✍️ Author: {props.author[0].toUpperCase() + props.author.slice(1)}
+          ✍️ Author:{" "}
+          {props.author.length > 0
+            ? props.author[0].toUpperCase() + props.author.slice(1)
+            : "Anonymous"}
         </p>
         <p>📋 Tags: {props.tags.join(", ")} </p>
       </Link>

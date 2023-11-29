@@ -49,7 +49,6 @@ const CreatePost = () => {
     }
     const body = {
       ...state,
-      readTime: Math.round(state.post.split(" ").length / 200),
     };
     fetch(`${process.env.NEXT_PUBLIC_API_URL}/post/${state.id}`, {
       method: "POST",
@@ -68,24 +67,25 @@ const CreatePost = () => {
               router.push("/");
             }
           });
+        } else {
+          switch (res.status) {
+            case 401:
+              alert("You are not login");
+              break;
+            case 403:
+              alert("Your session has ended, please relogin");
+              break;
+            case 400:
+              alert("Duplicate post's ID, please provide another post's ID");
+              break;
+            default:
+              alert("An internal error has happened");
+              break;
+          }
         }
       })
       .catch((error) => {
-        console.error(error);
-        switch (error.response?.status) {
-          case 401:
-            alert("You are not login");
-            break;
-          case 403:
-            alert("Your session has ended, please relogin");
-            break;
-          case 400:
-            alert("Duplicate post's ID, please provide another post's ID");
-            break;
-          default:
-            alert("An internal error has happened");
-            break;
-        }
+        alert("Internal error with fetch");
       });
   };
 

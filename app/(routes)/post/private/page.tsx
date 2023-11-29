@@ -1,20 +1,23 @@
 "use client";
 import { redirect, useRouter } from "next/navigation";
 import React, { useEffect, useState } from "react";
-import post from "../../public/[id]/page.module.css";
+import post from "../public/page.module.css";
 import Comments from "@/app/_components/comments/comments";
 import EditAndDelete from "./editAndDelete";
 
-const PrivatePost = ({ params }: { params: { id: string } }) => {
+const PrivatePost = ({
+  searchParams,
+}: {
+  searchParams: { [key: string]: string };
+}) => {
   const router = useRouter();
   const [data, setData] = useState(undefined as any);
   useEffect(() => {
-    fetch(`${process.env.NEXT_PUBLIC_API_URL}/post/${params.id}`, {
+    fetch(`${process.env.NEXT_PUBLIC_API_URL}/post/${searchParams.id}`, {
       cache: "no-cache",
       credentials: "include",
     })
       .then((res) => {
-        console.log(res.ok);
         if (res.ok)
           res.json().then((data) => {
             if (!data.success) {
@@ -49,8 +52,11 @@ const PrivatePost = ({ params }: { params: { id: string } }) => {
             {data.readTime} minute to read
           </p>
           <p>
-            ✍️ Author: {data.author[0].toUpperCase() + data.author.slice(1)} |
-            🩹 Last edited: {new Date().toLocaleDateString("en-GB")}
+            ✍️ Author:{" "}
+            {data.author.length > 0
+              ? data.author[0].toUpperCase() + data.author.slice(1)
+              : "Anonymous"}{" "}
+            | 🩹 Last edited: {new Date().toLocaleDateString("en-GB")}
           </p>
           <p>🔎 Visiblity: {data.isPublic ? "Public" : "Private"}</p>
           <p>📋 Tags: {data.tags.join(", ")}</p>
@@ -67,8 +73,8 @@ const PrivatePost = ({ params }: { params: { id: string } }) => {
           dangerouslySetInnerHTML={{ __html: data.post }}
         />
       </div>
-      <EditAndDelete author={data.author} id={params.id} />
-      <Comments id={params.id} />
+      <EditAndDelete author={data.author} id={searchParams.id} />
+      <Comments id={searchParams.id} />
     </>
   );
 };

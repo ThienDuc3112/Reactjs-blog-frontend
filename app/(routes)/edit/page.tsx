@@ -7,11 +7,11 @@ const ReactQuill = dynamic(() => import("react-quill"), {
   ssr: false,
 });
 import "react-quill/dist/quill.snow.css";
-import toolbar from "../../../_assets/toolbarOptions.json";
-import createPostCSS from "../../createpost/page.module.css";
-import TAGS from "../../../_assets/tags.json";
+import toolbar from "@/app/_assets/toolbarOptions.json";
+import createPostCSS from "@/app/(routes)/createpost/page.module.css";
+import TAGS from "@/app/_assets/tags.json";
 
-const Edit = ({ params }: { params: { id: string } }) => {
+const Edit = ({ searchParams }: { searchParams: { id: string } }) => {
   const router = useRouter();
   const { user } = useUserContext();
   let [post, setPost] = useState("");
@@ -21,11 +21,10 @@ const Edit = ({ params }: { params: { id: string } }) => {
   let [tags, setTags] = useState([] as string[]);
   let [id, setId] = useState("");
   let [author, setAuthor] = useState(user?.username ?? "Anonymous");
-  let [time, setTime] = useState(new Date());
   let [submitButtonDisabled, setSubmitButtonDisabled] = useState(false);
 
   useEffect(() => {
-    fetch(`${process.env.NEXT_PUBLIC_API_URL}/post/${params.id}`, {
+    fetch(`${process.env.NEXT_PUBLIC_API_URL}/post/${searchParams.id}`, {
       credentials: "include",
     })
       .then((res) => {
@@ -39,7 +38,6 @@ const Edit = ({ params }: { params: { id: string } }) => {
               setTags(data.data.tags);
               setId(data.data.id);
               setAuthor(data.data.author);
-              setTime(new Date(data.data.time));
             }
           });
         }
@@ -73,11 +71,11 @@ const Edit = ({ params }: { params: { id: string } }) => {
       setSubmitButtonDisabled(false);
       return;
     }
-    if (!user || (user.username != "huyen" && user.username != author)) {
-      alert("You don't have permission to edit this post");
-      router.push("/");
-      return;
-    }
+    // if (!user || (user.username != "huyen" && user.username != author)) {
+    //   alert("You don't have permission to edit this post");
+    //   router.push("/");
+    //   return;
+    // }
     const body = {
       post,
       isPublic,
@@ -85,11 +83,8 @@ const Edit = ({ params }: { params: { id: string } }) => {
       title,
       tags,
       id,
-      author,
-      time,
-      readTime: Math.round(post.split(" ").length / 200),
     };
-    fetch(`${process.env.NEXT_PUBLIC_API_URL}/post/${params.id}`, {
+    fetch(`${process.env.NEXT_PUBLIC_API_URL}/post/${searchParams.id}`, {
       mode: "cors",
       credentials: "include",
       method: "PATCH",
@@ -107,6 +102,22 @@ const Edit = ({ params }: { params: { id: string } }) => {
               router.push("/");
             }
           });
+        } else {
+          switch (res.status) {
+            case 401:
+              alert("You are unauthorized");
+              router.push("/");
+              break;
+            case 403:
+              alert("Your session has ended, please relogin");
+              break;
+            case 400:
+              alert("Duplicate post's ID, please provide another post's ID");
+              break;
+            default:
+              alert("An internal error has happened");
+              break;
+          }
         }
       })
       .catch((error) => {

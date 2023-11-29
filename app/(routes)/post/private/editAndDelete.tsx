@@ -1,6 +1,6 @@
 "use client";
 import Link from "next/link";
-import postWrapperCSS from "../../public/[id]/editAndDelete.module.css";
+import postWrapperCSS from "../public/editAndDelete.module.css";
 import { useUserContext } from "@/app/_context/context";
 import { useRouter } from "next/navigation";
 
@@ -55,7 +55,7 @@ const EditAndDelete = ({ id, author }: { id: string; author: string }) => {
     <>
       {user.username == author || user.role.indexOf(0) >= 0 ? (
         <div className={postWrapperCSS.optionContainer}>
-          <Link className={`${postWrapperCSS.button}`} href={`/edit/${id}`}>
+          <Link className={`${postWrapperCSS.button}`} href={`/edit?id=${id}`}>
             <label className={postWrapperCSS.center}>Edit</label>
           </Link>
           <button

@@ -1,5 +1,5 @@
 import PreviewList from "@/app/_components/previewList/previewList";
-import homeCSS from "../../page.module.css";
+import homeCSS from "@/app/(routes)/page.module.css";
 
 const TagFilter = ({ params }: { params: { tag: string } }) => (
   <>
