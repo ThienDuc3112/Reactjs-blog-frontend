@@ -82,7 +82,6 @@ const Edit = ({ searchParams }: { searchParams: { id: string } }) => {
       description,
       title,
       tags,
-      id,
     };
     fetch(`${process.env.NEXT_PUBLIC_API_URL}/post/${searchParams.id}`, {
       mode: "cors",
@@ -166,7 +165,7 @@ const Edit = ({ searchParams }: { searchParams: { id: string } }) => {
 
         <div id="options" className={createPostCSS.options}>
           <div id="status" className={createPostCSS.optionsBox}>
-            <h3>Publish</h3>
+            <h3>Update</h3>
             <span>Visiblity: {isPublic ? "Public" : "Private"}</span>
             <div className={createPostCSS.buttonsContainer}>
               {/* <button className={createPostCSS.button}>Save as draft</button> */}
@@ -185,7 +184,7 @@ const Edit = ({ searchParams }: { searchParams: { id: string } }) => {
                 disabled={submitButtonDisabled}
                 onClick={submit}
               >
-                Publish
+                Update
               </button>
             </div>
           </div>
@@ -200,9 +199,7 @@ const Edit = ({ searchParams }: { searchParams: { id: string } }) => {
               className={createPostCSS.postIDInput}
               value={id}
               placeholder="Post's ID "
-              onChange={(e) => {
-                setId(e.target.value.split(" ").join("_").toLowerCase());
-              }}
+              disabled
             />
           </div>
 

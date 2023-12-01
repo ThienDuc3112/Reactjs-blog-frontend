@@ -42,6 +42,20 @@ const Login = () => {
             }
             return;
           });
+        } else {
+          switch (res.status) {
+            case 401: {
+              alert("Incorrect password");
+              break;
+            }
+            case 404: {
+              alert("User not found");
+              break;
+            }
+            default:
+              alert("Unable to login");
+              break;
+          }
         }
       })
       .catch((err) => {

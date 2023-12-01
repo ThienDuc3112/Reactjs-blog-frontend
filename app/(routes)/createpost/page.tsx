@@ -164,7 +164,13 @@ const CreatePost = () => {
               onChange={(e) => {
                 setState({
                   ...state,
-                  id: e.target.value.split(" ").join("_").toLowerCase(),
+                  id: e.target.value
+                    .split("")
+                    .filter((c) => /[a-zA-Z0-9_ ]/gm.test(c))
+                    .join("")
+                    .split(" ")
+                    .join("_")
+                    .toLowerCase(),
                 });
               }}
             />
