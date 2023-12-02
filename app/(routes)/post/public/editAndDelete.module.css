@@ -16,6 +16,7 @@
   flex-direction: row;
   text-align: center;
   text-decoration: none;
+  cursor: pointer;
 }
 
 .button:hover {
@@ -34,4 +35,5 @@
   margin: auto;
   width: fit-content;
   display: block;
+  cursor: pointer;
 }

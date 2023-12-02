@@ -3,10 +3,11 @@ import { useState } from "react";
 import commentCSS from "./comments.module.css";
 import CommentField from "./commentField";
 import CommentCard from "./commentCard";
+import { IComment } from "@/app/_interfaces/comment";
 
 const Comments = ({ id }: { id: string }) => {
   const [disabled, setDisabled] = useState(false);
-  const [comments, setComment] = useState([] as any[]);
+  const [comments, setComments] = useState([] as any[]);
   const toggleDisabled = () => setDisabled((prev) => !prev);
   const requestComments = () => {
     toggleDisabled();
@@ -15,7 +16,7 @@ const Comments = ({ id }: { id: string }) => {
         if (res.ok) {
           res.json().then((data) => {
             if (data.success) {
-              setComment((prev) => [...prev, ...data.data]);
+              setComments((prev) => [...prev, ...data.data]);
               return;
             }
             alert("I haven't handle this case");
@@ -26,22 +27,29 @@ const Comments = ({ id }: { id: string }) => {
       })
       .catch((err) => {
         alert("An error happened");
-      })
-      .finally(toggleDisabled);
+      });
+    // .finally(toggleDisabled);
   };
   return (
     <div className={commentCSS.commentSection}>
-      <CommentField />
-      {comments.map((comment) => (
-        <CommentCard key={`${Math.random()}`} />
+      <CommentField id={id} setComments={setComments} />
+      {comments.map((comment: IComment) => (
+        <CommentCard
+          message={comment.message}
+          username={comment.username}
+          date={new Date(comment.date)}
+          key={`${Math.random()}`}
+        />
       ))}
-      <button
-        className={`${commentCSS.button} ${disabled ?? commentCSS.disabled}`}
-        disabled={disabled}
-        onClick={requestComments}
-      >
-        <p>Load comments</p>
-      </button>
+      <div>
+        <button
+          className={`${commentCSS.button}`}
+          disabled={disabled}
+          onClick={requestComments}
+        >
+          {disabled ? "Disabled" : "Load comments"}
+        </button>
+      </div>
     </div>
   );
 };
