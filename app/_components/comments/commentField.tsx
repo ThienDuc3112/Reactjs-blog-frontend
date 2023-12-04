@@ -3,6 +3,7 @@ import { FormEvent, useState } from "react";
 import CSS from "./commentField.module.css";
 import { setState } from "@/app/_interfaces/setState";
 import { IComment } from "@/app/_interfaces/comment";
+import { useUserContext } from "@/app/_context/context";
 
 const CommentField = ({
   id,
@@ -11,8 +12,12 @@ const CommentField = ({
   id: string;
   setComments: setState<IComment[]>;
 }) => {
+  const { user } = useUserContext();
   const [comment, setComment] = useState("");
   const [disabled, setDisabled] = useState(false);
+  if (!user.role.includes(0) && !user.role.includes(2)) {
+    return null;
+  }
   const submit = (e: FormEvent<HTMLFormElement>) => {
     setDisabled(true);
     e.preventDefault();
@@ -27,7 +32,6 @@ const CommentField = ({
       .then((res) => {
         if (res.ok) {
           res.json().then((data) => {
-            console.log(data);
             if (data.success) {
               setComments((prev) => [data.data, ...prev]);
               setComment("");
@@ -53,9 +57,9 @@ const CommentField = ({
           placeholder="Comment haven't been implement yet"
           className={CSS.commentArea}
           onChange={(e) => {
-            console.log(comment);
             setComment(e.target.value.slice(0, 1000));
           }}
+          value={comment}
         />
         <div className={CSS.info}>
           <p

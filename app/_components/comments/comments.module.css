@@ -3,10 +3,13 @@
   display: flex;
   justify-content: center;
   flex-direction: column;
+  width: 80%;
+  margin: auto;
 }
 
 .button {
   margin: auto;
+  margin-bottom: 20px;
   padding: auto 10px;
   height: 45px;
   width: 150px;

@@ -1,16 +1,16 @@
 import PreviewList from "@/app/_components/previewList/previewList";
 import homeCSS from "@/app/(routes)/page.module.css";
 import Image from "next/image";
+import background from "@/app/_assets/tagBG.jpg";
 
 const TagFilter = ({ params }: { params: { tag: string } }) => (
   <>
     <Image
       className={homeCSS.backgroundImg}
       alt="Let hope this background don't break"
-      src="https://wallpapercave.com/wp/akHTqZe.jpg"
-      width={1920}
-      height={1080}
-      unoptimized
+      src={background}
+      width={1280}
+      height={540}
     />
     <div className={homeCSS.title}>
       <h1>Tag: {params.tag}</h1>

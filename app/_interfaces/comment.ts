@@ -3,4 +3,5 @@ export interface IComment {
   date: Date;
   message: string;
   username: string;
+  _id: string;
 }

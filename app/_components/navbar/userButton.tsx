@@ -37,7 +37,7 @@ const UserButtons = () => {
             </Link>,
           ]
         : [
-            user.role.indexOf(0) >= 0 || user.role.indexOf(1) >= 0 ? (
+            user.role.includes(0) || user.role.includes(1) ? (
               <Link
                 key={"createpost"}
                 className={`${navbar.accountButton} ${navbar.createPost}`}

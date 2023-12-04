@@ -2,6 +2,7 @@ import Link from "next/link";
 import navbar from "./navbar.module.css";
 import UserButtons from "./userButton";
 import Image from "next/image";
+import avatar from "@/app/_assets/avatar.jpg";
 
 const Navbar = () => {
   return (
@@ -11,11 +12,10 @@ const Navbar = () => {
           <Image
             id="logo"
             className={navbar.logo}
-            src="https://avatars.githubusercontent.com/u/142168995?v=4"
+            src={avatar}
             alt="logo"
             width={130}
             height={130}
-            unoptimized
           />
         </Link>
         <Link className={`${navbar.hrefa} ${navbar.responsive}`} href="/">

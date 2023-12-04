@@ -1,0 +1,22 @@
+.commentCard {
+  margin: 20px auto;
+  width: 100%;
+  max-width: 800px;
+  background-color: white;
+  border: 1px #eee;
+  border-radius: 10px;
+  box-shadow: 3px 7px 5px rgba(0, 0, 0, 0.45);
+}
+
+.metadata {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin: 0 20px;
+}
+
+.message {
+  margin: 0 20px 10px 20px;
+  white-space: pre-line;
+  overflow-wrap: break-word;
+}

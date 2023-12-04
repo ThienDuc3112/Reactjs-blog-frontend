@@ -1,0 +1,22 @@
+.deleteWrapper {
+  margin: 0 20px 10px 20px;
+  display: flex;
+  justify-content: right;
+}
+
+.deleteWrapper > button {
+  background-color: #ed7067;
+  padding: auto 10px;
+  height: 35px;
+  width: 75px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  border: none;
+  display: flex;
+  flex-direction: row;
+  text-align: center;
+  text-decoration: none;
+  cursor: pointer;
+}

@@ -7,7 +7,7 @@ import { IComment } from "@/app/_interfaces/comment";
 
 const Comments = ({ id }: { id: string }) => {
   const [disabled, setDisabled] = useState(false);
-  const [comments, setComments] = useState([] as any[]);
+  const [comments, setComments] = useState([] as IComment[]);
   const toggleDisabled = () => setDisabled((prev) => !prev);
   const requestComments = () => {
     toggleDisabled();
@@ -35,9 +35,11 @@ const Comments = ({ id }: { id: string }) => {
       <CommentField id={id} setComments={setComments} />
       {comments.map((comment: IComment) => (
         <CommentCard
+          setComments={setComments}
           message={comment.message}
           username={comment.username}
           date={new Date(comment.date)}
+          _id={comment._id}
           key={`${Math.random()}`}
         />
       ))}
