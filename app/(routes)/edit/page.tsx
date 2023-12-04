@@ -1,6 +1,6 @@
 "use client";
 import { useUserContext } from "@/app/_context/context";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import dynamic from "next/dynamic";
 const ReactQuill = dynamic(() => import("react-quill"), {
@@ -11,7 +11,8 @@ import toolbar from "@/app/_assets/toolbarOptions.json";
 import createPostCSS from "@/app/(routes)/createpost/page.module.css";
 import TAGS from "@/app/_assets/tags.json";
 
-const Edit = ({ searchParams }: { searchParams: { id: string } }) => {
+const Edit = () => {
+  const searchParams = useSearchParams();
   const router = useRouter();
   const { user } = useUserContext();
   let [post, setPost] = useState("");
@@ -24,7 +25,7 @@ const Edit = ({ searchParams }: { searchParams: { id: string } }) => {
   let [submitButtonDisabled, setSubmitButtonDisabled] = useState(false);
 
   useEffect(() => {
-    fetch(`${process.env.NEXT_PUBLIC_API_URL}/post/${searchParams.id}`, {
+    fetch(`${process.env.NEXT_PUBLIC_API_URL}/post/${searchParams.get("id")}`, {
       credentials: "include",
     })
       .then((res) => {
@@ -83,7 +84,7 @@ const Edit = ({ searchParams }: { searchParams: { id: string } }) => {
       title,
       tags,
     };
-    fetch(`${process.env.NEXT_PUBLIC_API_URL}/post/${searchParams.id}`, {
+    fetch(`${process.env.NEXT_PUBLIC_API_URL}/post/${searchParams.get("id")}`, {
       mode: "cors",
       credentials: "include",
       method: "PATCH",

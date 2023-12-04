@@ -8,7 +8,7 @@ const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: "Duc's place",
-  description: "Written by sweat and blood, and a lot of stackoverflow",
+  description: "Written with sweat and blood, and a lot of stackoverflow",
 };
 
 export default function RootLayout({
