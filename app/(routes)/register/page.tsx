@@ -11,9 +11,11 @@ const Register = () => {
     email: "",
     password: "",
   });
-
+  const [disabled, setDisabled] = useState(false);
   const submit = (e: FormEvent) => {
     e.preventDefault();
+    if (disabled) return;
+    setDisabled(true);
     if (
       user.password.length == 0 ||
       user.username.length == 0 ||
@@ -34,17 +36,25 @@ const Register = () => {
         if (res.ok) {
           res.json().then((data) => {
             if (data.success) {
-              alert("Register successfully");
+              alert(
+                "A verification email has been sent to your address, please check your email for verification"
+              );
               router.push("/login");
             }
             return;
           });
+        } else {
+          alert(
+            "Server cannot verify email right now, please retry at a later date"
+          );
+          router.push("/");
         }
       })
       .catch((err) => {
         alert(`Error: ${err?.response?.data?.message}`);
         router.push("/");
-      });
+      })
+      .finally(() => setDisabled(true));
   };
 
   return (
@@ -92,7 +102,9 @@ const Register = () => {
           }}
         />
       </span>
-      <button type="submit">Register</button>
+      <button disabled={disabled} type="submit">
+        Register
+      </button>
     </form>
   );
 };
