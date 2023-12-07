@@ -11,6 +11,8 @@ const Register = () => {
     email: "",
     password: "",
   });
+  const [dupUser, setDupUser] = useState(false);
+  const [dupEmail, setDupEmail] = useState(false);
   const [disabled, setDisabled] = useState(false);
   const submit = (e: FormEvent) => {
     e.preventDefault();
@@ -44,48 +46,63 @@ const Register = () => {
             return;
           });
         } else {
-          alert(
-            "Server cannot verify email right now, please retry at a later date"
-          );
-          router.push("/");
+          if (typeof res.json == "function") {
+            res.json().then((data: { field?: string[] }) => {
+              if (data.field) {
+                setDupUser(data.field.includes("username"));
+                setDupEmail(data.field.includes("email"));
+              }
+            });
+          } else {
+            alert("Internal error happened, please try again later");
+          }
         }
       })
       .catch((err) => {
         alert(`Error: ${err?.response?.data?.message}`);
         router.push("/");
       })
-      .finally(() => setDisabled(true));
+      .finally(() => setDisabled(false));
   };
 
   return (
-    <form
-      className={`${loginCSS.wrapper} ${registerCSS.height}`}
-      onSubmit={submit}
-    >
+    <form className={`${loginCSS.wrapper}`} onSubmit={submit}>
       <h1 style={{ marginTop: "80px" }}>Register</h1>
       <span>
-        <label htmlFor="username">Username</label>
+        <label htmlFor="username">
+          Username{dupUser ? `\t${user.username} has been taken` : ""}
+        </label>
         <input
           type="text"
           name="username"
           id="username"
           value={user.username.toUpperCase()}
+          className={dupUser ? loginCSS.invalid : ""}
           onChange={(e) => {
+            setDupUser(false);
             setUser({
               ...user,
-              username: e.target.value.toLowerCase().split(" ").join("_"),
+              username: e.target.value
+                .toLowerCase()
+                .trim()
+                .split(" ")
+                .join("_"),
             });
           }}
         />
       </span>
       <span>
-        <label htmlFor="email">Email</label>
+        <label htmlFor="email">
+          Email{dupEmail ? `\t${user.email} has already been used` : ""}
+        </label>
         <input
           type="email"
           name="email"
           id="email"
           value={user.email.toUpperCase()}
+          className={dupEmail ? loginCSS.invalid : ""}
           onChange={(e) => {
+            setDupEmail(false);
             setUser({ ...user, email: e.target.value.toLowerCase() });
           }}
         />

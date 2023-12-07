@@ -24,6 +24,10 @@
   background-color: rgb(120, 169, 257);
 }
 
+.wrapper button:disabled {
+  background-color: grey;
+}
+
 .wrapper span {
   display: flex;
   width: 100%;
@@ -44,6 +48,10 @@
   font-size: 40px;
   margin-top: 70px;
   margin-bottom: 25px;
+}
+
+.invalid {
+  background-color: rgb(255, 128, 128);
 }
 
 @media screen and (max-width: 900px) {
