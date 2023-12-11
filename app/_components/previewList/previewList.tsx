@@ -32,7 +32,29 @@ const PreviewList = ({ link }: { link: string }) => {
       .finally(() => {
         setDisabled(false);
       });
-  }, [user, page]);
+  }, [page]);
+  useEffect(() => {
+    setPage(1);
+    fetch(`${link}?page=${1}`, {
+      credentials: "include",
+    })
+      .then((res) =>
+        res.json().then((data) => {
+          if (data.success) {
+            setAllPost(data.data.preview);
+            setEnd(data.data.end);
+          } else {
+            alert(data.message);
+          }
+        })
+      )
+      .catch((err) => {
+        alert("Cannot connect to the server");
+      })
+      .finally(() => {
+        setDisabled(false);
+      });
+  }, [user]);
   return (
     <div>
       {allPost.length > 0 ? (

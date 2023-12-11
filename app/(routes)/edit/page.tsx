@@ -10,6 +10,7 @@ import "react-quill/dist/quill.snow.css";
 import toolbar from "@/app/_assets/toolbarOptions.json";
 import createPostCSS from "@/app/(routes)/createpost/page.module.css";
 import TAGS from "@/app/_assets/tags.json";
+import { useFetch } from "@/app/_hooks/useFetch";
 
 const Edit = () => {
   const searchParams = useSearchParams();
@@ -21,33 +22,29 @@ const Edit = () => {
   let [description, setDescription] = useState("");
   let [tags, setTags] = useState([] as string[]);
   let [id, setId] = useState("");
-  let [author, setAuthor] = useState(user?.username ?? "Anonymous");
   let [submitButtonDisabled, setSubmitButtonDisabled] = useState(false);
-
+  const { loading, data, err } = useFetch(
+    `${process.env.NEXT_PUBLIC_API_URL}/post/${searchParams.get("id")}`,
+    true
+  );
   useEffect(() => {
-    fetch(`${process.env.NEXT_PUBLIC_API_URL}/post/${searchParams.get("id")}`, {
-      credentials: "include",
-    })
-      .then((res) => {
-        if (res.ok) {
-          res.json().then((data) => {
-            if (data.success) {
-              setPost(data.data.post);
-              setIsPublic(data.data.isPublic);
-              setTitle(data.data.title);
-              setDescription(data.data.description);
-              setTags(data.data.tags);
-              setId(data.data.id);
-              setAuthor(data.data.author);
-            }
-          });
-        }
-      })
-      .catch((err) => {
-        alert("Cannot get post data");
-        router.push("/");
-      });
-  }, []);
+    if (!loading && data?.success) {
+      setPost(data.data.post);
+      setIsPublic(data.data.isPublic);
+      setTitle(data.data.title);
+      setDescription(data.data.description);
+      setTags(data.data.tags);
+      setId(data.data.id);
+    }
+    if (!loading && err) {
+      alert("Cannot get post data");
+      router.push("/");
+    }
+  }, [loading]);
+
+  if (loading || (!loading && err)) {
+    return <div>Loading</div>;
+  }
 
   const tagChange = (value: string) => {
     let tagsCopy = [...tags];
@@ -72,11 +69,6 @@ const Edit = () => {
       setSubmitButtonDisabled(false);
       return;
     }
-    // if (!user || (user.username != "huyen" && user.username != author)) {
-    //   alert("You don't have permission to edit this post");
-    //   router.push("/");
-    //   return;
-    // }
     const body = {
       post,
       isPublic,
@@ -121,10 +113,10 @@ const Edit = () => {
         }
       })
       .catch((error) => {
-        console.log(error);
         alert("An internal error has happened");
         router.push("/");
-      });
+      })
+      .finally(() => setSubmitButtonDisabled(false));
   };
 
   return (
@@ -169,7 +161,6 @@ const Edit = () => {
             <h3>Update</h3>
             <span>Visiblity: {isPublic ? "Public" : "Private"}</span>
             <div className={createPostCSS.buttonsContainer}>
-              {/* <button className={createPostCSS.button}>Save as draft</button> */}
               <button
                 className={
                   isPublic

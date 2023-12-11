@@ -1,10 +1,11 @@
 "use client";
-import { useState } from "react";
+import { useState, FormEvent } from "react";
 import login from "@/app/(routes)/login/login.module.css";
 
 const ResetPassword = () => {
   const [email, setEmail] = useState("");
-  const submit = () => {
+  const submit = (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
     alert("Not implemented");
   };
   return (

@@ -24,8 +24,6 @@ const Navbar = () => {
         <Link className={`${navbar.hrefa} ${navbar.responsive}`} href="/about">
           About
         </Link>
-        {/* <Link className={navbar.hrefa} href="/posts">Posts</Link> */}
-        {/* <Link className={navbar.hrefa} href="/projects">Projects</Link> */}
         <Link className={`${navbar.hrefa} ${navbar.responsive}`} href="/tags">
           Tags
         </Link>
