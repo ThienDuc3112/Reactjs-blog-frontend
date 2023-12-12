@@ -67,12 +67,12 @@ const Login = () => {
     <form className={login.wrapper} onSubmit={submit}>
       <h1>Login</h1>
       <span>
-        <label htmlFor="username">Username</label>
+        <label htmlFor="username">Username/email</label>
         <input
           type="text"
           name="username"
           id="username"
-          value={user.username.toUpperCase()}
+          value={user.username}
           onChange={(e) => {
             setUser({
               ...user,
@@ -93,7 +93,22 @@ const Login = () => {
           }}
         />
       </span>
-      <button type="submit">Login</button>
+      <span
+        style={{
+          display: "flex",
+          flexDirection: "row",
+        }}
+      >
+        <button
+          type="button"
+          onClick={() => {
+            router.push("/resetpassword");
+          }}
+        >
+          Forget password
+        </button>
+        <button type="submit">Login</button>
+      </span>
     </form>
   );
 };
