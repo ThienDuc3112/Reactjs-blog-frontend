@@ -10,10 +10,7 @@ const Post = async ({
   searchParams: { [key: string]: string };
 }) => {
   const res = await fetch(
-    `${process.env.NEXT_PUBLIC_API_URL}/post/${searchParams["id"]}`,
-    {
-      cache: "no-cache",
-    }
+    `${process.env.NEXT_PUBLIC_API_URL}/post/${searchParams["id"]}`
   );
   const dataJson = await res.json();
   if (!dataJson.success) {
