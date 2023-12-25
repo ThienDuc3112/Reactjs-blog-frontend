@@ -1,47 +1,34 @@
 import { useEffect, useState } from "react";
-import { TUseEffectMethod } from "../_interfaces/useFetch";
 
-export const useFetch = (
+interface State<T> {
+  data?: T;
+  err?: Error;
+}
+
+export const useFetch = <T>(
   url: string,
-  withCredential: boolean = false,
-  method: TUseEffectMethod = "GET",
-  body?: any
-) => {
-  const [loading, setLoading] = useState(true);
-  const [data, setData] = useState(null as any);
-  const [err, setErr] = useState(null as any);
+  withCredential: boolean = false
+): State<T> => {
+  const [state, setState] = useState({} as State<T>);
   useEffect(() => {
-    const options: RequestInit = {
-      method,
-    };
-    if (method != "GET") {
-      options.headers = {
-        "Content-type": "application/json",
-      };
-      options.body = JSON.stringify(body);
+    if (!url) {
+      setState({ err: new Error("No url provided") });
+      return;
     }
-    if (withCredential) {
-      options.credentials = "include";
-    }
-    fetch(url, options)
-      .then((res) => {
+    (async () => {
+      try {
+        const res = await fetch(url, {
+          credentials: withCredential ? "include" : "omit",
+        });
         if (!res.ok) {
-          setErr({ code: res.status });
-          setLoading(false);
+          throw new Error(res.statusText);
         }
-        if (typeof res.json == "function") {
-          res.json().then((json) => {
-            setData(json);
-            setLoading(false);
-          });
-        } else {
-          setLoading(false);
-        }
-      })
-      .catch((err: any) => {
-        setErr(err);
-        setLoading(false);
-      });
-  }, []);
-  return { loading, err, data };
+        const data = (await res.json()) as T;
+        setState({ data });
+      } catch (error) {
+        setState({ err: error as Error });
+      }
+    })();
+  }, [url, withCredential]);
+  return state;
 };

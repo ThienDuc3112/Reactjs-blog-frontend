@@ -9,9 +9,7 @@ const VerifyReset = ({ params }: { params: { token: string } }) => {
   const [password, setPassword] = useState("");
   const [secondEntry, setSecondEntry] = useState("");
   const [disabled, setDisabled] = useState(false);
-  // const [loading, setLoading] = useState(true);
-  const [valid, setValid] = useState(false);
-  const { loading, data, err } = useFetch(
+  const { data, err } = useFetch(
     `${process.env.NEXT_PUBLIC_API_URL}/auth/reset/${params.token}`
   );
   const submit = (e: FormEvent<HTMLFormElement>) => {
@@ -60,43 +58,32 @@ const VerifyReset = ({ params }: { params: { token: string } }) => {
         setDisabled(false);
       });
   };
-
-  useEffect(() => {
-    if (!loading && !err) {
-      setValid(true);
-    }
-  }, [loading, err]);
-
-  if (loading) {
-    return <div>Loading</div>;
-  }
-  if (valid) {
-    return (
-      <form className={loginCSS.wrapper} onSubmit={submit}>
-        <h1>Reset password</h1>
-        <input
-          type="password"
-          value={password}
-          onChange={(e) => {
-            setPassword(e.target.value);
-          }}
-          placeholder="Enter your password"
-        />
-        <input
-          type="password"
-          value={secondEntry}
-          onChange={(e) => {
-            setSecondEntry(e.target.value);
-          }}
-          placeholder="Enter your password again"
-        />
-        <button type="submit" disabled={disabled}>
-          Submit
-        </button>
-      </form>
-    );
-  }
-  return <div>Invalid reset link</div>;
+  if (err) return <div>Invalid reset link</div>;
+  if (!data) return <div>Loading</div>;
+  return (
+    <form className={loginCSS.wrapper} onSubmit={submit}>
+      <h1>Reset password</h1>
+      <input
+        type="password"
+        value={password}
+        onChange={(e) => {
+          setPassword(e.target.value);
+        }}
+        placeholder="Enter your password"
+      />
+      <input
+        type="password"
+        value={secondEntry}
+        onChange={(e) => {
+          setSecondEntry(e.target.value);
+        }}
+        placeholder="Enter your password again"
+      />
+      <button type="submit" disabled={disabled}>
+        Submit
+      </button>
+    </form>
+  );
 };
 
 export default VerifyReset;

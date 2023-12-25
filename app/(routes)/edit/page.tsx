@@ -1,5 +1,4 @@
 "use client";
-import { useUserContext } from "@/app/_context/context";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import dynamic from "next/dynamic";
@@ -11,11 +10,11 @@ import toolbar from "@/app/_assets/toolbarOptions.json";
 import createPostCSS from "@/app/(routes)/createpost/page.module.css";
 import TAGS from "@/app/_assets/tags.json";
 import { useFetch } from "@/app/_hooks/useFetch";
+import { IPost } from "@/app/_interfaces/post";
 
 const Edit = () => {
   const searchParams = useSearchParams();
   const router = useRouter();
-  const { user } = useUserContext();
   let [post, setPost] = useState("");
   let [isPublic, setIsPublic] = useState(true);
   let [title, setTitle] = useState("");
@@ -23,12 +22,16 @@ const Edit = () => {
   let [tags, setTags] = useState([] as string[]);
   let [id, setId] = useState("");
   let [submitButtonDisabled, setSubmitButtonDisabled] = useState(false);
-  const { loading, data, err } = useFetch(
+  const { data, err } = useFetch<{ success: boolean; data: IPost }>(
     `${process.env.NEXT_PUBLIC_API_URL}/post/${searchParams.get("id")}`,
     true
   );
+  if (err) {
+    alert("Cannot get post data");
+    router.push("/");
+  }
   useEffect(() => {
-    if (!loading && data?.success) {
+    if (data?.success) {
       setPost(data.data.post);
       setIsPublic(data.data.isPublic);
       setTitle(data.data.title);
@@ -36,13 +39,8 @@ const Edit = () => {
       setTags(data.data.tags);
       setId(data.data.id);
     }
-    if (!loading && err) {
-      alert("Cannot get post data");
-      router.push("/");
-    }
-  }, [loading]);
-
-  if (loading || (!loading && err)) {
+  }, [data]);
+  if (!data) {
     return <div>Loading</div>;
   }
 

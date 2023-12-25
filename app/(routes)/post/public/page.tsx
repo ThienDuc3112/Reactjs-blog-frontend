@@ -3,17 +3,18 @@ import React from "react";
 import post from "./page.module.css";
 import Comments from "@/app/_components/comments/comments";
 import EditAndDelete from "./editAndDelete";
+import { get } from "@/app/_helper/get";
+import { IPost } from "@/app/_interfaces/post";
 
 const Post = async ({
   searchParams,
 }: {
   searchParams: { [key: string]: string };
 }) => {
-  const res = await fetch(
+  const [dataJson, err] = await get<{ success: boolean; data: IPost }>(
     `${process.env.NEXT_PUBLIC_API_URL}/post/${searchParams["id"]}`
   );
-  const dataJson = await res.json();
-  if (!dataJson.success) {
+  if (err != null || !dataJson?.success) {
     redirect("/notfound");
   }
   const data = dataJson.data;

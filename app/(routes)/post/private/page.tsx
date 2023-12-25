@@ -5,6 +5,7 @@ import post from "../public/page.module.css";
 import Comments from "@/app/_components/comments/comments";
 import EditAndDelete from "./editAndDelete";
 import { useFetch } from "@/app/_hooks/useFetch";
+import { IPost } from "@/app/_interfaces/post";
 
 const PrivatePost = ({
   searchParams,
@@ -12,19 +13,16 @@ const PrivatePost = ({
   searchParams: { [key: string]: string };
 }) => {
   const router = useRouter();
-  const { data, loading, err } = useFetch(
+  const { data, err } = useFetch<{ success: boolean; data: IPost }>(
     `${process.env.NEXT_PUBLIC_API_URL}/post/${searchParams.id}`,
     true
   );
-  if (!loading && (!data?.success || err)) {
+  if (err) {
     router.push("/notfound");
     return;
   }
-  if (loading) {
-    return <div>Loading</div>;
-  }
   if (!data) {
-    return <></>;
+    return <>Loading</>;
   }
   let date = new Date(data.data.time);
   return (
