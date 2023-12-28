@@ -1,8 +1,8 @@
-export const get = async <T>(
+export const post = async <T>(
   url: string,
   body: any,
   withCredential: boolean = false
-): Promise<[T | null, unknown | null]> => {
+): Promise<[T, null] | [null, unknown]> => {
   try {
     const data: T = await fetch(url, {
       credentials: withCredential ? "include" : "omit",

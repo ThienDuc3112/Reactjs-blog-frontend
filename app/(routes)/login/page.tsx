@@ -3,6 +3,7 @@ import { useUserContext } from "@/app/_context/context";
 import { FormEvent, useState } from "react";
 import login from "./login.module.css";
 import { useRouter } from "next/navigation";
+import { post } from "@/app/_helper/post";
 
 const Login = () => {
   const globalUser = useUserContext();
@@ -13,54 +14,41 @@ const Login = () => {
     password: "",
   });
 
-  const submit = (e: FormEvent) => {
+  const submit = async (e: FormEvent) => {
     e.preventDefault();
     if (user.password.length == 0 || user.username.length == 0) {
       alert("Please fill all fields");
       return;
     }
-    fetch(`${process.env.NEXT_PUBLIC_API_URL}/auth/login`, {
-      method: "POST",
-      headers: {
-        "Content-type": "application/json",
-      },
-      body: JSON.stringify(user),
-      credentials: "include",
-    })
-      .then((res) => {
-        if (res.ok) {
-          res.json().then((data) => {
-            if (data.success) {
-              if (globalUser.setUser != undefined) {
-                globalUser.setUser({
-                  username: user.username,
-                  role: data.role,
-                });
-              }
-              alert("Login successfully");
-              router.push("/");
-            }
-            return;
-          });
-        } else {
-          switch (res.status) {
-            case 401: {
-              alert("Incorrect password");
-              break;
-            }
-            case 404: {
-              alert("User not found");
-              break;
-            }
-            default:
-              alert("Unable to login");
-              break;
-          }
+    const [data, err] = await post<{ role: number[] }>(
+      `/api/login`,
+      user,
+      true
+    );
+    if (data == null) {
+      switch ((err as any).status) {
+        case 401: {
+          alert("Incorrect password");
+          break;
         }
-      })
-      .catch((err) => {
-        alert(err);
+        case 404: {
+          alert("User not found");
+          break;
+        }
+        default:
+          alert("Unable to login");
+          break;
+      }
+      return;
+    }
+    if (globalUser.setUser != undefined) {
+      globalUser.setUser({
+        username: user.username,
+        role: data.role,
       });
+    }
+    alert("Login successfully");
+    router.push("/");
   };
 
   return (

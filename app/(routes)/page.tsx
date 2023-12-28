@@ -27,7 +27,7 @@ export default function Home() {
           <p>If you haven{"'"}t realize, Bocchi is literally me</p>
         </div>
       </div>
-      <PreviewList link={`${process.env.NEXT_PUBLIC_API_URL}/post/preview`} />
+      <PreviewList link={`/api/post/preview`} />
     </>
   );
 }

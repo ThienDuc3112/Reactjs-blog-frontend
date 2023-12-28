@@ -1,29 +1,22 @@
-"use client";
-import { redirect, useRouter } from "next/navigation";
-import React, { useEffect, useState } from "react";
+import { redirect } from "next/navigation";
 import post from "../public/page.module.css";
 import Comments from "@/app/_components/comments/comments";
 import EditAndDelete from "./editAndDelete";
-import { useFetch } from "@/app/_hooks/useFetch";
 import { IPost } from "@/app/_interfaces/post";
+import { get } from "@/app/_helper/get";
+import { cookies } from "next/headers";
 
-const PrivatePost = ({
+const PrivatePost = async ({
   searchParams,
 }: {
   searchParams: { [key: string]: string };
 }) => {
-  const router = useRouter();
-  const { data, err } = useFetch<{ success: boolean; data: IPost }>(
+  const [data, err] = await get<{ success: boolean; data: IPost }>(
     `${process.env.NEXT_PUBLIC_API_URL}/post/${searchParams.id}`,
-    true
+    false,
+    { headers: { Authorization: `Bearer ${cookies().get("token")?.value}` } }
   );
-  if (err) {
-    router.push("/notfound");
-    return;
-  }
-  if (!data) {
-    return <>Loading</>;
-  }
+  if (!data) redirect("/notfound");
   let date = new Date(data.data.time);
   return (
     <>
