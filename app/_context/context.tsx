@@ -19,32 +19,18 @@ const ThemeContext = createContext<IThemeContext>({
 
 const ContextProvider = ({
   children,
+  username,
+  role,
 }: {
   children: React.ReactNode;
+  username?: string;
+  role?: number[];
 }): JSX.Element => {
   const [user, setUser] = useState({
-    username: "",
-    role: [] as number[],
+    username: username ?? "",
+    role: role ?? [],
   });
   const [theme, setTheme] = useState(Theme.Light);
-  useEffect(() => {
-    fetch(`${process.env.NEXT_PUBLIC_API_URL}/auth`, {
-      credentials: "include",
-      mode: "cors",
-      cache: "no-cache",
-    })
-      .then((res) => {
-        if (res.ok) {
-          res.json().then((data) => {
-            setUser({
-              username: data.data.username,
-              role: data.data.role,
-            });
-          });
-        }
-      })
-      .catch((error) => {});
-  }, []);
   return (
     <ThemeContext.Provider value={{ theme, setTheme }}>
       <UserContext.Provider value={{ user, setUser }}>

@@ -1,11 +1,13 @@
 export const get = async <T>(
   url: string,
-  withCredential: boolean = false
+  withCredential: boolean = false,
+  options?: RequestInit
 ): Promise<[T, null] | [null, unknown]> => {
   try {
-    const data: T = await fetch(url, {
+    const option = options ?? {
       credentials: withCredential ? "include" : "omit",
-    }).then((res) => {
+    };
+    const data: T = await fetch(url, option).then((res) => {
       if (!res.ok) {
         const err = new Error("Request fail");
         (err as any).status = res.status;
